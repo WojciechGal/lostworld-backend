@@ -36,7 +36,6 @@ public class UserController {
     }
 
     @GetMapping("/sec")
-    @ResponseBody
     public String test() {
         // Get authenticated user name from SecurityContext
         SecurityContext context = SecurityContextHolder.getContext();

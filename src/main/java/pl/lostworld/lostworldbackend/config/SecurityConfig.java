@@ -21,14 +21,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .anyRequest().permitAll()
                     .and()
                 .formLogin()
-                    .loginProcessingUrl("users/login")
+                    .loginProcessingUrl("/users/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/users/sec")
-                    .failureUrl("users/login?error")
+                //todo do sprawdzenia
+                    .failureUrl("/users/login?error=fail")
                 .and()
                 .logout()
-                    .logoutUrl("users/logout")
+                    .logoutUrl("/users/logout")
                     .logoutSuccessUrl("/users/sec");
     }
 
