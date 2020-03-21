@@ -4,7 +4,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -51,17 +50,11 @@ public class UserController {
         return allUsers;
     }
 
-    @PostMapping("/login")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public User loginUser() {
-
-    }
-
-    @PostMapping("/loginprocess")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public User loginUser() {
-
-    }
+//    @PostMapping("/login")
+//    @ResponseStatus(HttpStatus.ACCEPTED)
+//    public User loginUser() {
+//
+//    }
 
 //    @PostMapping("/logout")
 //    @ResponseStatus(HttpStatus.ACCEPTED)
