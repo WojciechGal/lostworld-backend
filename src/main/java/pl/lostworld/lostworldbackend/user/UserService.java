@@ -7,9 +7,9 @@ public interface UserService {
 
     User findByUsername(String username);
 
-    void saveUser(User user);
+    User saveUser(User user);
 
-    public Optional<User> findUserById(Long id);
+    public User findUserById(Long id);
 
     public void deleteUserById(Long id);
 

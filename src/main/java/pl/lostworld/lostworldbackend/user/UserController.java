@@ -1,52 +1,72 @@
 package pl.lostworld.lostworldbackend.user;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.stereotype.Controller;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/create")
-    public String createUser(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "test/register";
-    }
+    //prawdopodobnie obiekt będzie produkowany na froncie
+//    @GetMapping("/create")
+//    public User createUser() {
+//        return new User();
+//    }
 
-    @PostMapping("/create")
-    public String createUser(@Valid User user, BindingResult result, Model model) {
-
-        if (result.hasErrors()) {
-            model.addAttribute("user", user);
-            return "test/register";
-        }
-        userService.saveUser(user);
-        return "redirect:/";
+    @PostMapping("/register")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User createUser(@Valid @RequestBody User user) {
+        return userService.saveUser(user);
     }
 
     @GetMapping("/check")
-    @ResponseBody
-    public String check(@AuthenticationPrincipal CurrentUser customUser) {
-        User entityUser = customUser.getUser();
-        return "You are " + entityUser.getId() + ", " + entityUser.getUsername() + ", " + entityUser.getEmail() + ", "
-                + entityUser.getPassword() + ", " + entityUser.getEnabled()
-                + ", and you are authenticated as " + entityUser.getRoles();
+    public User check(@AuthenticationPrincipal CurrentUser customUser) {
+        return customUser.getUser();
     }
+
+    @GetMapping("/sec")
+    @ResponseBody
+    public String test() {
+        // Get authenticated user name from SecurityContext
+        SecurityContext context = SecurityContextHolder.getContext();
+
+        return context.getAuthentication().getName();
+    }
+
+    @GetMapping("/checkall")
+    public List<User> checkall() {
+        List<User> allUsers = userService.findUsers();
+        return allUsers;
+    }
+
+    @PostMapping("/login")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public User loginUser() {
+
+    }
+
+    @PostMapping("/loginprocess")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public User loginUser() {
+
+    }
+
+//    @PostMapping("/logout")
+//    @ResponseStatus(HttpStatus.ACCEPTED)
+//    public User loginUser() {
+//
+//    }
 
 }

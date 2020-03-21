@@ -27,18 +27,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
+    public User saveUser(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 
     @Override
-    public Optional<User> findUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
-        return user;
+    public User findUserById(Long id) {
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override

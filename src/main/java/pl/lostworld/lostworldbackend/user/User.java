@@ -8,6 +8,7 @@ import pl.lostworld.lostworldbackend.role.Role;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
@@ -32,6 +33,7 @@ public class User {
     //dodać więcej walidacji
     //lub dodać na froncie
     @NotBlank
+    @Size(min=8)
     private String password;
 
     private int enabled;
