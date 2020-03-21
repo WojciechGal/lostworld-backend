@@ -35,15 +35,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
     }
 
+    @Override
     public Optional<User> findUserById(Long id) {
         Optional<User> user = userRepository.findById(id);
         return user;
     }
 
+    @Override
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 
+    @Override
     public List<User> findUsers() {
         return userRepository.findAll();
     }

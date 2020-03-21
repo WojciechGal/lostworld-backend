@@ -30,6 +30,7 @@ public class User {
     private String email;
 
     //dodać więcej walidacji
+    //lub dodać na froncie
     @NotBlank
     private String password;
 
