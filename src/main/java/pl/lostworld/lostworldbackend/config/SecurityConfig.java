@@ -2,6 +2,7 @@ package pl.lostworld.lostworldbackend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,8 +26,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .usernameParameter("username")
                     .passwordParameter("password")
                     .defaultSuccessUrl("/users/sec")
-                //todo do sprawdzenia
-                    .failureUrl("/users/login?error=fail")
+                    .failureHandler((req,res,exp)->{
+                        String errMsg="";
+                        if(exp.getClass().isAssignableFrom(BadCredentialsException.class)){
+                            errMsg="Invalid username or password.";
+                        }else{
+                            errMsg="Unknown error - " + exp.getMessage();
+                        }
+                        res.sendError(403, errMsg);
+                    })
                 .and()
                 .logout()
                     .logoutUrl("/users/logout")
