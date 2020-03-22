@@ -1,9 +1,9 @@
 package pl.lostworld.lostworldbackend.user;
 
-
 import lombok.Getter;
 import lombok.Setter;
 import pl.lostworld.lostworldbackend.role.Role;
+import pl.lostworld.lostworldbackend.validators.users.UniqueUserField;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -22,16 +22,16 @@ public class User {
     private Long id;
 
     @NotBlank
+    @UniqueUserField(column = "username")
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false, unique = true)
     @Email
     @NotBlank
+    @UniqueUserField(column = "email")
+    @Column(nullable = false, unique = true)
     private String email;
 
-    //dodać więcej walidacji
-    //lub dodać na froncie
     @NotBlank
     @Size(min=8)
     private String password;

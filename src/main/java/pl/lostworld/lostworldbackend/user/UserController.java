@@ -1,12 +1,10 @@
 package pl.lostworld.lostworldbackend.user;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-import pl.lostworld.lostworldbackend.jsonTemplates.ResponseValidationFailedTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,22 +29,6 @@ public class UserController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public Object createUser(@Valid @RequestBody User user) {
-
-        //dodatkowa walidacja zapobiegająca 500 - persistence error
-        ResponseValidationFailedTemplate responseValidationFailedTemplate = new ResponseValidationFailedTemplate(400);
-
-        if (userService.findUsers().stream().map(User::getUsername).anyMatch(p -> p.equals(user.getUsername()))) {
-            responseValidationFailedTemplate.addError("username", "username already exists");
-        }
-
-        if (userService.findUsers().stream().map(User::getEmail).anyMatch(p -> p.equals(user.getEmail()))) {
-            responseValidationFailedTemplate.addError("email", "email already exists");
-        }
-
-        if (!responseValidationFailedTemplate.getErrors().isEmpty()) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(responseValidationFailedTemplate);
-        }
-
         return userService.saveUser(user);
     }
 
