@@ -1,16 +1,19 @@
 package pl.lostworld.lostworldbackend.config;
 
+import lombok.extern.java.Log;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import pl.lostworld.lostworldbackend.user.SpringDataUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
+@Log
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
@@ -27,8 +30,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/users/login")
                     .usernameParameter("username")
                     .passwordParameter("password")
-                    .defaultSuccessUrl("/users/sec")
+                    .successHandler((req,res,auth)->{
+                        for (GrantedAuthority authority : auth.getAuthorities()) {
+                            log.info(authority.getAuthority());
+                        }
+                        log.info("Logged in: " + auth.getName());
+                        res.setStatus(200);
+                    })
                     .failureHandler((req,res,exp)->{
+                        log.info("Error during logginng in");
                         String errMsg="";
                         if(exp.getClass().isAssignableFrom(BadCredentialsException.class)){
                             errMsg="Invalid username or password.";
@@ -40,7 +50,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                     .logoutUrl("/users/logout")
-                    .logoutSuccessUrl("/users/sec");
+                    .logoutSuccessHandler((req,res,auth)->{
+                        if (auth != null) {
+                            log.info("Logout: " + auth.getName());
+                        } else {
+                            log.info("Someone tried to logout");
+                        }
+                        res.setStatus(200);
+                    });
     }
 
     @Bean
