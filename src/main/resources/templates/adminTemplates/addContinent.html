@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Dodawanie kontynentu</title>
+</head>
+<body>
+<h1>Dodaj kontynent</h1>
+<form action="#" th:action="@{/continents/add}" th:object="${continent}" method="post">
+    <p>Nazwa: <input type="text" th:field="*{name}" /></p>
+    <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+</form>
+</body>
+</html>
