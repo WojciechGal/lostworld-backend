@@ -43,8 +43,8 @@ public class UserController {
         return context.getAuthentication().getName();
     }
 
-    @GetMapping("/checkall")
-    public List<User> checkall() {
+    @GetMapping("/checkAll")
+    public List<User> checkAll() {
         List<User> allUsers = userService.findUsers();
         return allUsers;
     }
