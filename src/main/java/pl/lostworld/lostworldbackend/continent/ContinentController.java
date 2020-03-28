@@ -21,14 +21,14 @@ public class ContinentController {
         this.continentService = continentService;
     }
 
-    @GetMapping("/checkall")
+    @GetMapping("/checkAll")
     @ResponseBody
-    public List<Continent> checkall() {
-        return continentService.checkall();
+    public List<Continent> checkAllContinents() {
+        return continentService.checkAll();
     }
 
     @GetMapping("/add")
-    public String formAction(Model model) {
+    public String addContinent(Model model) {
         model.addAttribute("continent", new Continent());
         return "adminTemplates/addContinent";
     }
@@ -39,7 +39,7 @@ public class ContinentController {
             return "adminTemplates/addContinent";
         }
         continentService.addContinent(continent);
-        return "redirect:/continents/checkall";
+        return "redirect:/continents/checkAll";
     }
 
 }

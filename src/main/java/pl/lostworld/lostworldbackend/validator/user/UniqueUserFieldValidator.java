@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.validators.users;
+package pl.lostworld.lostworldbackend.validator.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import pl.lostworld.lostworldbackend.user.User;

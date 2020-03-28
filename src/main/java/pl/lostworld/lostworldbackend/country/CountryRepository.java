@@ -1,4 +1,8 @@
 package pl.lostworld.lostworldbackend.country;
 
-public interface CountryRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface CountryRepository extends JpaRepository<Country, Long> {
 }

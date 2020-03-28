@@ -13,7 +13,7 @@ public class ContinentService {
         this.continentRepository = continentRepository;
     }
 
-    public List<Continent> checkall() {
+    public List<Continent> checkAll() {
         return continentRepository.findAll();
     }
 

@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.validators.users;
+package pl.lostworld.lostworldbackend.validator.user;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

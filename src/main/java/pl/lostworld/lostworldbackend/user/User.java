@@ -3,7 +3,7 @@ package pl.lostworld.lostworldbackend.user;
 import lombok.Getter;
 import lombok.Setter;
 import pl.lostworld.lostworldbackend.role.Role;
-import pl.lostworld.lostworldbackend.validators.users.UniqueUserField;
+import pl.lostworld.lostworldbackend.validator.user.UniqueUserField;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
