@@ -35,7 +35,6 @@ public class ContinentController {
 
     @PostMapping("/add")
     public String addContinent(@Valid Continent continent, BindingResult result) {
-        //todo walidacja danych do poprawy
         if (result.hasErrors()) {
             return "adminTemplates/addContinent";
         }
