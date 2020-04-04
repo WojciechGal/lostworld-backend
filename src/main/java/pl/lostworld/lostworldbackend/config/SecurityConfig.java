@@ -26,10 +26,10 @@ import pl.lostworld.lostworldbackend.user.SpringDataUserDetailsService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //mod
-    @Autowired
-    private SpringDataUserDetailsService customUserDetailsService;
-    @Autowired
-    private JwtAuthenticationEntryPoint unauthorizedHandler;
+//    @Autowired
+//    private SpringDataUserDetailsService customUserDetailsService;
+//    @Autowired
+//    private JwtAuthenticationEntryPoint unauthorizedHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,16 +39,49 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf()
                     .disable()
                 .exceptionHandling()
-                    .authenticationEntryPoint(unauthorizedHandler)
+                    .authenticationEntryPoint(unauthorizedHandler())
                     .and()
                 .sessionManagement()
                     .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                     .and()
                 .authorizeRequests()
                     .anyRequest()
-                        .permitAll();
+                        .permitAll()
+                    .and()
+                .formLogin()
+                    .loginProcessingUrl("/users/login")
+                    .usernameParameter("username")
+                    .passwordParameter("password")
+                    .successHandler((req,res,auth)->{
+                        for (GrantedAuthority authority : auth.getAuthorities()) {
+                            log.info(authority.getAuthority());
+                        }
+                        log.info("Logged in: " + auth.getName());
+                        res.setStatus(200);
+                    })
+                    .failureHandler((req,res,exp)->{
+                        log.info("Error during logginng in");
+                        String errMsg="";
+                        if(exp.getClass().isAssignableFrom(BadCredentialsException.class)){
+                            errMsg="Invalid username or password.";
+                        }else{
+                            errMsg="Unknown error - " + exp.getMessage();
+                        }
+                        res.sendError(403, errMsg);
+                    })
+                    .and()
+                .logout()
+                    .logoutUrl("/users/logout")
+                    .logoutSuccessHandler((req,res,auth)->{
+                        if (auth != null) {
+                            log.info("Logout: " + auth.getName());
+                        } else {
+                            log.info("Someone tried to logout");
+                        }
+                        res.setStatus(200);
+                    });
 
-        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(customJwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
     @Bean
@@ -63,14 +96,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     //mod
     @Bean
-    public JwtAuthenticationFilter jwtAuthenticationFilter() {
+    public JwtAuthenticationFilter customJwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
+    }
+
+    @Bean
+    public JwtAuthenticationEntryPoint unauthorizedHandler() {
+        return new JwtAuthenticationEntryPoint();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
         authenticationManagerBuilder
-                .userDetailsService(customUserDetailsService)
+                .userDetailsService(customUserDetailsService())
                 .passwordEncoder(passwordEncoder());
     }
 
