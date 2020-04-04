@@ -21,10 +21,10 @@ public class UniqueUserFieldValidator implements ConstraintValidator<UniqueUserF
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         if ("username".equals(column)) {
-            return userService.findUsers().stream().map(User::getUsername).noneMatch(p -> p.equals(value));
+            return userService.findAllUsers().stream().map(User::getUsername).noneMatch(p -> p.equals(value));
         }
         if ("email".equals(column)) {
-            return userService.findUsers().stream().map(User::getEmail).noneMatch(p -> p.equals(value));
+            return userService.findAllUsers().stream().map(User::getEmail).noneMatch(p -> p.equals(value));
         }
         return true;
     }

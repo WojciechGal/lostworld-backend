@@ -6,10 +6,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
-import pl.lostworld.lostworldbackend.user.SpringDataUserDetailsService;
+import pl.lostworld.lostworldbackend.user.CustomUserDetailsService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -18,14 +17,13 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Log
-@Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtTokenProvider tokenProvider;
     //rezerwowo nie ma XD CustomUserDetailsService - callicoder github
     @Autowired
-    private SpringDataUserDetailsService customUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
