@@ -14,6 +14,8 @@ import pl.lostworld.lostworldbackend.authentication.JwtAuthenticationResponse;
 import pl.lostworld.lostworldbackend.authentication.JwtTokenProvider;
 import pl.lostworld.lostworldbackend.webTemplates.LoginTemplate;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -31,12 +33,6 @@ public class UserController {
         this.authenticationManager = authenticationManager;
         this.tokenProvider = tokenProvider;
     }
-
-    //prawdopodobnie obiekt będzie produkowany na froncie
-//    @GetMapping("/create")
-//    public User createUser() {
-//        return new User();
-//    }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
@@ -61,30 +57,25 @@ public class UserController {
         return allUsers;
     }
 
-    //mod
     @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginTemplate loginTemplate) {
-        log.info(loginTemplate.getUsername());
-        log.info(loginTemplate.getPassword());
+        log.info(loginTemplate.getUsername() + " is trying to login...");
+
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginTemplate.getUsername(),
                         loginTemplate.getPassword()
                 )
         );
-        log.info(authentication.toString());
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        log.info("Login successfull");
 
         String jwt = tokenProvider.generateToken(authentication);
-        log.info(jwt);
+        log.info("Given token:" + jwt);
 
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-//    @PostMapping("/logout")
-//    @ResponseStatus(HttpStatus.ACCEPTED)
-//    public User loginUser() {
-//
-//    }
+    //todo co z wylogowywaniem? - dokumentacja wskazuje, że jwt tokena po stronie backendu się nie usuwa
 
 }
