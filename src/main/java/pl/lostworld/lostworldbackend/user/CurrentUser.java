@@ -12,6 +12,8 @@ import java.util.stream.Collectors;
 
 public class CurrentUser implements UserDetails {
 
+    private User actualUser;
+
     private Long id;
 
     private String username;
@@ -24,12 +26,13 @@ public class CurrentUser implements UserDetails {
 
     private Collection<? extends GrantedAuthority> authorities;
 
-    public CurrentUser(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public CurrentUser(Long id, String username, String email, String password, Collection<? extends GrantedAuthority> authorities, User user) {
         this.id = id;
         this.username = username;
         this.email = email;
         this.password = password;
         this.authorities = authorities;
+        this.actualUser = user;
     }
 
     public static CurrentUser create(User user) {
@@ -42,7 +45,8 @@ public class CurrentUser implements UserDetails {
                 user.getUsername(),
                 user.getEmail(),
                 user.getPassword(),
-                authorities
+                authorities,
+                user
         );
     }
 
@@ -101,5 +105,9 @@ public class CurrentUser implements UserDetails {
     public int hashCode() {
 
         return Objects.hash(id);
+    }
+
+    public User getActualUser() {
+        return actualUser;
     }
 }

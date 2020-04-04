@@ -45,8 +45,8 @@ public class UserController {
     }
 
     @GetMapping("/check")
-    public CurrentUser check(@AuthenticationPrincipal CurrentUser currentUser) {
-        return currentUser;
+    public User check(@AuthenticationPrincipal CurrentUser currentUser) {
+        return currentUser.getActualUser();
     }
 
     @GetMapping("/sec")
