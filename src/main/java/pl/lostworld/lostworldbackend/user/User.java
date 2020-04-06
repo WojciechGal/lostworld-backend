@@ -6,9 +6,8 @@ import pl.lostworld.lostworldbackend.role.Role;
 import pl.lostworld.lostworldbackend.validator.user.UniqueUserField;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
@@ -42,4 +41,20 @@ public class User {
     @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
+
+    @Column(name = "updated_on")
+    private Timestamp updatedOn;
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedOn = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Column(name = "created_on")
+    private Timestamp createdOn;
+
+    @PrePersist
+    public void prePersist() {
+        createdOn = new Timestamp(System.currentTimeMillis());
+    }
 }
