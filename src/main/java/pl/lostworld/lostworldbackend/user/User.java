@@ -2,12 +2,16 @@ package pl.lostworld.lostworldbackend.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.lostworld.lostworldbackend.rating.continent.ContinentRating;
+import pl.lostworld.lostworldbackend.rating.country.CountryRating;
 import pl.lostworld.lostworldbackend.role.Role;
 import pl.lostworld.lostworldbackend.validator.user.UniqueUserField;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -57,4 +61,10 @@ public class User {
     public void prePersist() {
         createdOn = new Timestamp(System.currentTimeMillis());
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<ContinentRating> continentRatingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<CountryRating> countryRatingList = new ArrayList<>();
 }

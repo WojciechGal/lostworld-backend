@@ -21,12 +21,6 @@ import pl.lostworld.lostworldbackend.user.CustomUserDetailsService;
 @Log
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    //mod
-//    @Autowired
-//    private CustomUserDetailsService customUserDetailsService;
-//    @Autowired
-//    private JwtAuthenticationEntryPoint unauthorizedHandler;
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -45,7 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     //todo usunąć pierdoły z testowaniem logowania/dodać zabezpieczenia
 
                     .antMatchers("/continents/add").hasRole("ADMIN")
-                    .antMatchers("/countries/add").hasRole("ADMIN")
+                    .antMatchers("/countries/add").authenticated()
                     .antMatchers("/cities/add").authenticated()
                     .antMatchers("/relics/add").authenticated()
                     //wizja oceniania np. dzieł w muzeum

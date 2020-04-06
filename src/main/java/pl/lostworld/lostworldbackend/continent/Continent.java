@@ -6,9 +6,12 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import pl.lostworld.lostworldbackend.country.Country;
+import pl.lostworld.lostworldbackend.rating.continent.ContinentRating;
+import pl.lostworld.lostworldbackend.rating.country.CountryRating;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,4 +31,23 @@ public class Continent {
 
     @ManyToMany(mappedBy = "continents")
     private List<Country> countries = new ArrayList<>();
+
+    @Column(name = "updated_on")
+    private Timestamp updatedOn;
+
+    @PreUpdate
+    public void preUpdate() {
+        updatedOn = new Timestamp(System.currentTimeMillis());
+    }
+
+    @Column(name = "created_on")
+    private Timestamp createdOn;
+
+    @PrePersist
+    public void prePersist() {
+        createdOn = new Timestamp(System.currentTimeMillis());
+    }
+
+    @OneToMany(mappedBy = "continent")
+    private List<ContinentRating> continentRatingList = new ArrayList<>();
 }
