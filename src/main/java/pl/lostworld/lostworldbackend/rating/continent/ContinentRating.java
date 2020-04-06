@@ -1,5 +1,9 @@
 package pl.lostworld.lostworldbackend.rating.continent;
 
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.user.User;
 
@@ -7,8 +11,12 @@ import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
+@Table(name = "continents_ratings")
 public class ContinentRating {
 
     @Id
@@ -25,19 +33,9 @@ public class ContinentRating {
     @ManyToOne
     private Continent continent;
 
-    @Column(name = "updated_on")
-    private Timestamp updatedOn;
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
 
-    @PreUpdate
-    public void preUpdate() {
-        updatedOn = new Timestamp(System.currentTimeMillis());
-    }
-
-    @Column(name = "created_on")
-    private Timestamp createdOn;
-
-    @PrePersist
-    public void prePersist() {
-        createdOn = new Timestamp(System.currentTimeMillis());
-    }
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 }
