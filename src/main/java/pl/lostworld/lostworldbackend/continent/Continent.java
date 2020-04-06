@@ -1,6 +1,7 @@
 package pl.lostworld.lostworldbackend.continent;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +20,6 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "continents")
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Continent {
 
     @Id
@@ -29,6 +29,7 @@ public class Continent {
     @NotBlank
     private String name;
 
+    @JsonManagedReference
     @ManyToMany(mappedBy = "continents")
     private List<Country> countries = new ArrayList<>();
 
