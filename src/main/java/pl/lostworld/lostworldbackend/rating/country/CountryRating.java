@@ -10,6 +10,7 @@ import pl.lostworld.lostworldbackend.user.User;
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Entity
@@ -24,12 +25,15 @@ public class CountryRating {
 
     @Min(1)
     @Max(10)
+    @NotNull
     private int value;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     @ManyToOne
+    @NotNull
     private Country country;
 
     @CreationTimestamp

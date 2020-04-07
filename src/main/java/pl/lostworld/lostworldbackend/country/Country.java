@@ -1,12 +1,12 @@
 package pl.lostworld.lostworldbackend.country;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.lostworld.lostworldbackend.city.City;
 import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.rating.country.CountryRating;
 
@@ -43,4 +43,8 @@ public class Country {
 
     @OneToMany(mappedBy = "country")
     private List<CountryRating> countryRatingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "country")
+    @JsonManagedReference
+    private List<City> cities = new ArrayList<>();
 }
