@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/countriesRatings")
+@RequestMapping("/ratings/countries")
 public class CountryRatingController {
 
     private CountryRatingService countryRatingService;
