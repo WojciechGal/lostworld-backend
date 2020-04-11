@@ -1,5 +1,7 @@
 package pl.lostworld.lostworldbackend.rating.continent;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -31,10 +33,12 @@ public class ContinentRating {
 
     @ManyToOne
     @NotNull
+    @JsonManagedReference
     private User user;
 
     @ManyToOne
     @NotNull
+    @JsonManagedReference
     private Continent continent;
 
     @CreationTimestamp

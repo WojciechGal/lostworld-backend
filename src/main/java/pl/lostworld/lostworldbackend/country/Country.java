@@ -1,9 +1,8 @@
 package pl.lostworld.lostworldbackend.country;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -34,7 +33,7 @@ public class Country {
 
     @ManyToMany
     @NotEmpty
-    @JsonBackReference
+    @JsonIgnore
     private List<Continent> continents = new ArrayList<>();
 
     @CreationTimestamp
@@ -44,6 +43,7 @@ public class Country {
     private LocalDateTime updateDateTime;
 
     @OneToMany(mappedBy = "country")
+    @JsonBackReference
     private List<CountryRating> countryRatingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "country")
