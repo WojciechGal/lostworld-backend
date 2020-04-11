@@ -3,16 +3,13 @@ package pl.lostworld.lostworldbackend.country;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.continent.ContinentService;
 
 import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/countries")
 public class CountryController {
 
@@ -25,7 +22,6 @@ public class CountryController {
     }
 
     @GetMapping("/checkAll")
-    @ResponseBody
     public List<Country> checkAllCountries() {
         return countryService.checkAll();
     }

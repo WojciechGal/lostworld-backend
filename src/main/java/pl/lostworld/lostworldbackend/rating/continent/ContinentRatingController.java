@@ -18,7 +18,6 @@ public class ContinentRatingController {
     }
 
     @GetMapping("/checkAll")
-    @ResponseBody
     public List<ContinentRating> checkAllContinentsRatings() {
         return continentRatingService.checkAll();
     }

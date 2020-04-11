@@ -18,7 +18,6 @@ public class CityController {
     }
 
     @GetMapping("/checkAll")
-    @ResponseBody
     public List<City> checkAllCities() {
         return cityService.checkAll();
     }
