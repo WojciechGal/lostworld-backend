@@ -46,7 +46,7 @@ public class City {
     @JsonIgnore
     private List<CityRating> cityRatingList = new ArrayList<>();
 
-    @OneToMany(mappedBy = "relics")
+    @OneToMany(mappedBy = "city")
     @JsonManagedReference
     private List<Relic> relics = new ArrayList<>();
 }
