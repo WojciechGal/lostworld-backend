@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.rating.city.CityRating;
 import pl.lostworld.lostworldbackend.rating.continent.ContinentRating;
 import pl.lostworld.lostworldbackend.rating.country.CountryRating;
+import pl.lostworld.lostworldbackend.rating.relic.RelicRating;
 import pl.lostworld.lostworldbackend.role.Role;
 import pl.lostworld.lostworldbackend.validator.user.UniqueUserField;
 
@@ -67,4 +68,8 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<CityRating> cityRatingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private List<RelicRating> relicRatingList = new ArrayList<>();
 }
