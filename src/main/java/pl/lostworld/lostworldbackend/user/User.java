@@ -11,7 +11,6 @@ import pl.lostworld.lostworldbackend.validator.user.UniqueUserField;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

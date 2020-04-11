@@ -1,7 +1,9 @@
 package pl.lostworld.lostworldbackend.country;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -30,9 +32,9 @@ public class Country {
     @NotBlank
     private String name;
 
-    @JsonBackReference
     @ManyToMany
     @NotEmpty
+    @JsonBackReference
     private List<Continent> continents = new ArrayList<>();
 
     @CreationTimestamp

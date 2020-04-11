@@ -20,6 +20,7 @@ import java.util.List;
 @Getter
 @Setter
 @Table(name = "continents")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Continent {
 
     @Id
@@ -29,7 +30,6 @@ public class Continent {
     @NotBlank
     private String name;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "continents")
     private List<Country> countries = new ArrayList<>();
 
