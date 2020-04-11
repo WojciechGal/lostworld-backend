@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.error;
+package pl.lostworld.lostworldbackend.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

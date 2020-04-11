@@ -12,11 +12,4 @@ public class WebAppConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**");
     }
-
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-//        registry.addViewController("/403").setViewName("test/403");
-//        registry.addViewController("/").setViewName("test/home");
-//        registry.addViewController("/login").setViewName("test/login");
-    }
 }
