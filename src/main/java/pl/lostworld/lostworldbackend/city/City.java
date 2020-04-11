@@ -1,16 +1,20 @@
 package pl.lostworld.lostworldbackend.city;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.country.Country;
+import pl.lostworld.lostworldbackend.rating.city.CityRating;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -35,4 +39,8 @@ public class City {
 
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
+
+    @OneToMany(mappedBy = "city")
+    @JsonIgnore
+    private List<CityRating> cityRatingList = new ArrayList<>();
 }
