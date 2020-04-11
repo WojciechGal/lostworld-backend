@@ -9,6 +9,8 @@ import pl.lostworld.lostworldbackend.rating.continent.ContinentRating;
 import pl.lostworld.lostworldbackend.rating.continent.ContinentRatingService;
 import pl.lostworld.lostworldbackend.rating.country.CountryRating;
 import pl.lostworld.lostworldbackend.rating.country.CountryRatingService;
+import pl.lostworld.lostworldbackend.rating.relic.RelicRating;
+import pl.lostworld.lostworldbackend.rating.relic.RelicRatingService;
 
 import java.util.List;
 
@@ -19,11 +21,13 @@ public class RatingController {
     private ContinentRatingService continentRatingService;
     private CountryRatingService countryRatingService;
     private CityRatingService cityRatingService;
+    private RelicRatingService relicRatingService;
 
-    public RatingController(ContinentRatingService continentRatingService, CountryRatingService countryRatingService, CityRatingService cityRatingService) {
+    public RatingController(ContinentRatingService continentRatingService, CountryRatingService countryRatingService, CityRatingService cityRatingService, RelicRatingService relicRatingService) {
         this.continentRatingService = continentRatingService;
         this.countryRatingService = countryRatingService;
         this.cityRatingService = cityRatingService;
+        this.relicRatingService = relicRatingService;
     }
 
     @GetMapping("/continents/checkAll")
@@ -39,5 +43,10 @@ public class RatingController {
     @GetMapping("/cities/checkAll")
     public List<CityRating> checkAllCitiesRatings() {
         return cityRatingService.checkAll();
+    }
+
+    @GetMapping("/relics/checkAll")
+    public List<RelicRating> checkAllRelicsRatings() {
+        return relicRatingService.checkAll();
     }
 }
