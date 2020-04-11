@@ -14,8 +14,6 @@ import pl.lostworld.lostworldbackend.authentication.JwtAuthenticationResponse;
 import pl.lostworld.lostworldbackend.authentication.JwtTokenProvider;
 import pl.lostworld.lostworldbackend.webTemplates.LoginTemplate;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 
