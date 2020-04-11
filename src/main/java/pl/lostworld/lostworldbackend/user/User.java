@@ -1,6 +1,6 @@
 package pl.lostworld.lostworldbackend.user;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -56,10 +56,10 @@ public class User {
     private LocalDateTime updateDateTime;
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+    @JsonIgnore
     private List<ContinentRating> continentRatingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+    @JsonIgnore
     private List<CountryRating> countryRatingList = new ArrayList<>();
 }

@@ -1,6 +1,6 @@
 package pl.lostworld.lostworldbackend.continent;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -37,6 +37,6 @@ public class Continent {
     private LocalDateTime updateDateTime;
 
     @OneToMany(mappedBy = "continent")
-    @JsonBackReference
+    @JsonIgnore
     private List<ContinentRating> continentRatingList = new ArrayList<>();
 }

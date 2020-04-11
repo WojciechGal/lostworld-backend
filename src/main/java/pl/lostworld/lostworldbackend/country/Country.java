@@ -1,6 +1,5 @@
 package pl.lostworld.lostworldbackend.country;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
@@ -43,7 +42,7 @@ public class Country {
     private LocalDateTime updateDateTime;
 
     @OneToMany(mappedBy = "country")
-    @JsonBackReference
+    @JsonIgnore
     private List<CountryRating> countryRatingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "country")
