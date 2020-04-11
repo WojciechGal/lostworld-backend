@@ -2,12 +2,14 @@ package pl.lostworld.lostworldbackend.city;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.country.Country;
 import pl.lostworld.lostworldbackend.rating.city.CityRating;
+import pl.lostworld.lostworldbackend.relic.Relic;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -43,4 +45,8 @@ public class City {
     @OneToMany(mappedBy = "city")
     @JsonIgnore
     private List<CityRating> cityRatingList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "relics")
+    @JsonManagedReference
+    private List<Relic> relics = new ArrayList<>();
 }
