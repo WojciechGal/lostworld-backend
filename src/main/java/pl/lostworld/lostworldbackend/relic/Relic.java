@@ -43,4 +43,6 @@ public class Relic {
     @OneToMany(mappedBy = "relic")
     @JsonIgnore
     private List<RelicRating> relicRatingList = new ArrayList<>();
+
+    private String description;
 }
