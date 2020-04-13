@@ -1,7 +1,6 @@
 package pl.lostworld.lostworldbackend.country;
 
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.continent.ContinentService;
 
@@ -26,20 +25,32 @@ public class CountryController {
     }
 
     @GetMapping("/add")
-    public String addCountry(Model model) {
-        Country country = new Country();
-        model.addAttribute("country", country);
-        model.addAttribute("continents", continentService.checkAll());
-        return "adminTemplates/addCountry";
+    public Country addCountry() {
+        return new Country();
     }
 
     @PostMapping("/add")
-    public String addCountry(Model model, @Valid Country country, BindingResult result) {
-        if (result.hasErrors()) {
-            model.addAttribute("continents", continentService.checkAll());
-            return "adminTemplates/addCountry";
-        }
-        countryService.addCountry(country);
-        return "redirect:/countries/checkAll";
+    @ResponseStatus(HttpStatus.CREATED)
+    public Country addCountry(@Valid @RequestBody Country country) {
+        return countryService.addCountry(country);
     }
+
+    ///////////////DEPRECATED/////////////////
+//    @GetMapping("/add")
+//    public String addCountry(Model model) {
+//        Country country = new Country();
+//        model.addAttribute("country", country);
+//        model.addAttribute("continents", continentService.checkAll());
+//        return "adminTemplates/addCountry";
+//    }
+//
+//    @PostMapping("/add")
+//    public String addCountry(Model model, @Valid Country country, BindingResult result) {
+//        if (result.hasErrors()) {
+//            model.addAttribute("continents", continentService.checkAll());
+//            return "adminTemplates/addCountry";
+//        }
+//        countryService.addCountry(country);
+//        return "redirect:/countries/checkAll";
+//    }
 }
