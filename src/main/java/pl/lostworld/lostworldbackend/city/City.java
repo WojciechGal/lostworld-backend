@@ -49,4 +49,6 @@ public class City {
     @OneToMany(mappedBy = "city")
     @JsonManagedReference
     private List<Relic> relics = new ArrayList<>();
+
+    private String description;
 }
