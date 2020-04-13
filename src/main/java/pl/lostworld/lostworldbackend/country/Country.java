@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.city.City;
 import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.rating.country.CountryRating;
+import pl.lostworld.lostworldbackend.validator.country.UniqueCountryField;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -28,6 +29,7 @@ public class Country {
     private Long id;
 
     @NotBlank
+    @UniqueCountryField(column = "name")
     private String name;
 
     @ManyToMany
@@ -48,4 +50,6 @@ public class Country {
     @OneToMany(mappedBy = "country")
     @JsonManagedReference
     private List<City> cities = new ArrayList<>();
+
+    private String description;
 }

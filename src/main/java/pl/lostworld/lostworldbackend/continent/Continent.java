@@ -7,6 +7,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.country.Country;
 import pl.lostworld.lostworldbackend.rating.continent.ContinentRating;
+import pl.lostworld.lostworldbackend.validator.continent.UniqueContinentField;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -25,6 +26,7 @@ public class Continent {
     private Long id;
 
     @NotBlank
+    @UniqueContinentField(column = "name")
     private String name;
 
     @ManyToMany(mappedBy = "continents")
@@ -39,4 +41,6 @@ public class Continent {
     @OneToMany(mappedBy = "continent")
     @JsonIgnore
     private List<ContinentRating> continentRatingList = new ArrayList<>();
+
+    private String description;
 }
