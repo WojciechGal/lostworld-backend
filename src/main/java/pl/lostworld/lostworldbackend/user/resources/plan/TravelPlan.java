@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import pl.lostworld.lostworldbackend.continent.Continent;
+import pl.lostworld.lostworldbackend.user.resources.plan.sequence.ContinentInSequence;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.Map;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,6 +26,7 @@ public class TravelPlan {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    //todo listy(z kolejnością) kontynentów itd.
+    @OneToMany(mappedBy = "travelPlan")
+    private List<ContinentInSequence> sequenceOfContinents;
 }
 
