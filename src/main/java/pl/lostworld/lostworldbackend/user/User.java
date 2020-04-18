@@ -72,4 +72,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     @JsonIgnore
     private List<RelicRating> relicRatingList = new ArrayList<>();
+
+    //users resources
+
 }
