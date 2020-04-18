@@ -26,7 +26,7 @@ public class TravelPlan {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    @OneToMany(mappedBy = "travelPlan")
+    @OneToMany(mappedBy = "travelPlan", cascade = CascadeType.ALL)
     private List<ContinentInSequence> sequenceOfContinents;
 }
 
