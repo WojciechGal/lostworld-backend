@@ -26,11 +26,6 @@ public class TravelPlan {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    //todo sprawdzić czy w DB będą się zapisywać takie same klucze
-    @OneToMany
-    @JoinTable(name = "sequence_of_continents_in_travel_plan",
-            joinColumns = {@JoinColumn(name = "travel_plan_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "continent_id", referencedColumnName = "id")})
-    private Map<Integer, Continent> sequenceOfContinents;
+    //todo listy(z kolejnością) kontynentów itd.
 }
 

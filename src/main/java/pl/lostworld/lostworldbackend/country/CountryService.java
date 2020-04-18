@@ -19,7 +19,11 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
-    public Country addCountry(Country country) {
+    public Country add(Country country) {
         return countryRepository.save(country);
+    }
+
+    public Country checkById(Long id) {
+        return countryRepository.findById(id).orElse(null);
     }
 }
