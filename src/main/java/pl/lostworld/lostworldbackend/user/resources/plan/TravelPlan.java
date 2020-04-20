@@ -45,5 +45,7 @@ public class TravelPlan {
 
     @ManyToOne
     private User user;
+
+    private String description;
 }
 
