@@ -4,7 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import pl.lostworld.lostworldbackend.user.resources.plan.sequence.ContinentInSequence;
+import pl.lostworld.lostworldbackend.continent.Continent;
+import pl.lostworld.lostworldbackend.country.Country;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -26,7 +27,10 @@ public class TravelPlan {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    @OneToMany(mappedBy = "travelPlan", cascade = CascadeType.ALL)
-    private List<ContinentInSequence> sequenceOfContinents;
+    @ManyToMany
+    private List<Continent> sequenceOfContinents;
+
+    @ManyToMany
+    private List<Country> sequenceOfCountries;
 }
 

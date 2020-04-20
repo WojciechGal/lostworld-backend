@@ -22,4 +22,8 @@ public class TravelPlanService {
     public TravelPlan add(TravelPlan travelPlan) {
         return travelPlanRepository.save(travelPlan);
     }
+
+    public TravelPlan checkById(Long id) {
+        return travelPlanRepository.findById(id).orElse(null);
+    }
 }

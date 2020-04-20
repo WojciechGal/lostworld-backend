@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.user.resources.plan.sequence;
+package pl.lostworld.lostworldbackend.user.resources.plan.sequence_DEPRECATED;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -24,4 +24,8 @@ public class ContinentInSequence {
 
     @ManyToOne
     private Continent continent;
+
+    //po stronie TravelPlan
+//    @OneToMany(mappedBy = "travelPlan", cascade = CascadeType.ALL)
+//    private List<ContinentInSequenceDeprecated> sequenceOfContinents;
 }
