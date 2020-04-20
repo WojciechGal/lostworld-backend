@@ -25,6 +25,9 @@ public class TravelPlan {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private User user;
+
     @CreationTimestamp
     private LocalDateTime createDateTime;
 
@@ -42,9 +45,6 @@ public class TravelPlan {
 
     @ManyToMany
     private List<Relic> sequenceOfRelics = new ArrayList<>();
-
-    @ManyToOne
-    private User user;
 
     private String description;
 }
