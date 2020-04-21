@@ -12,6 +12,7 @@ import pl.lostworld.lostworldbackend.user.User;
 import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class TravelPlan {
     private Long id;
 
     @ManyToOne
+    @NotNull
     private User user;
 
     @CreationTimestamp
