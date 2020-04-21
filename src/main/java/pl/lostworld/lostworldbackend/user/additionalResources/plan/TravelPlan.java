@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.user.resources.plan;
+package pl.lostworld.lostworldbackend.user.additionalResources.plan;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,6 +9,7 @@ import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.country.Country;
 import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.user.User;
+import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -47,5 +48,8 @@ public class TravelPlan {
     private List<Relic> sequenceOfRelics = new ArrayList<>();
 
     private String description;
+
+    @OneToOne(mappedBy = "travelPlan")
+    private Report report;
 }
 

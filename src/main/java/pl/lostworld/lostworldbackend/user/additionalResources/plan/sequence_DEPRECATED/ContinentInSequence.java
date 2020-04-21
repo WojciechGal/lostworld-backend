@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.user.resources.plan.sequence_DEPRECATED;
+package pl.lostworld.lostworldbackend.user.additionalResources.plan.sequence_DEPRECATED;
 
 //@Entity
 //@Getter

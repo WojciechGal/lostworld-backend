@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.user.resources.plan;
+package pl.lostworld.lostworldbackend.user.additionalResources.plan;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
