@@ -2,6 +2,7 @@ package pl.lostworld.lostworldbackend.user.additionalResources.plan;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.lostworld.lostworldbackend.user.User;
 
 import java.util.List;
 
@@ -25,5 +26,11 @@ public class TravelPlanService {
 
     public TravelPlan checkById(Long id) {
         return travelPlanRepository.findById(id).orElse(null);
+    }
+
+    public TravelPlan createNewTravelPlanForUser(User user) {
+        TravelPlan travelPlan = new TravelPlan();
+        travelPlan.setUser(user);
+        return travelPlan;
     }
 }

@@ -2,7 +2,9 @@ package pl.lostworld.lostworldbackend.user.additionalResources.plan;
 
 import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import pl.lostworld.lostworldbackend.user.CurrentUser;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -24,8 +26,8 @@ public class TravelPlanController {
     }
 
     @GetMapping("/add")
-    public TravelPlan addTravelPlan() {
-        return new TravelPlan();
+    public TravelPlan addTravelPlan(@AuthenticationPrincipal CurrentUser currentUser) {
+        return travelPlanService.createNewTravelPlanForUser(currentUser.getActualUser());
     }
 
     @PostMapping("/add")

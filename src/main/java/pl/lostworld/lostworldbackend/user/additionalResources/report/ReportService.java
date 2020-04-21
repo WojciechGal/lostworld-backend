@@ -2,6 +2,7 @@ package pl.lostworld.lostworldbackend.user.additionalResources.report;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.lostworld.lostworldbackend.user.User;
 
 import java.util.List;
 
@@ -25,5 +26,11 @@ public class ReportService {
 
     public Report add(Report report) {
         return reportRepository.save(report);
+    }
+
+    public Report createNewReportForUser(User user) {
+        Report report = new Report();
+        report.setUser(user);
+        return report;
     }
 }
