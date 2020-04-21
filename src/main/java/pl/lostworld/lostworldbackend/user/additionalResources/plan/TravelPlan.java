@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "travel_plan")
+@Table(name = "travel_plans")
 public class TravelPlan {
 
     @Id
