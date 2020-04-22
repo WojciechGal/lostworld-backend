@@ -12,7 +12,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.authentication.JwtAuthenticationResponse;
 import pl.lostworld.lostworldbackend.authentication.JwtTokenProvider;
-import pl.lostworld.lostworldbackend.webTemplates.LoginTemplate;
+import pl.lostworld.lostworldbackend.templates.LoginTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -56,7 +56,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginUser(@RequestBody LoginTemplate loginTemplate) {
+    public ResponseEntity loginUser(@RequestBody LoginTemplate loginTemplate) {
         log.info(loginTemplate.getUsername() + " is trying to login...");
 
         Authentication authentication = authenticationManager.authenticate(

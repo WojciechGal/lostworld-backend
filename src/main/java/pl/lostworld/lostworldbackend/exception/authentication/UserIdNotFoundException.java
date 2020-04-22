@@ -2,12 +2,12 @@ package pl.lostworld.lostworldbackend.exception.authentication;
 
 import org.springframework.security.core.AuthenticationException;
 
-public class UseridNotFoundException extends AuthenticationException {
-    public UseridNotFoundException(String msg) {
+public class UserIdNotFoundException extends AuthenticationException {
+    public UserIdNotFoundException(String msg) {
         super(msg);
     }
 
-    public UseridNotFoundException(String msg, Throwable t) {
+    public UserIdNotFoundException(String msg, Throwable t) {
         super(msg, t);
     }
 }
