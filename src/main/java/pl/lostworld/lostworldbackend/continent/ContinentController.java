@@ -29,7 +29,7 @@ public class ContinentController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Continent addContinent(@Valid @RequestBody Continent continent) {
-        return continentService.add(continent);
+        return continentService.save(continent);
     }
 
     /////////////DEPRECATED/////////////

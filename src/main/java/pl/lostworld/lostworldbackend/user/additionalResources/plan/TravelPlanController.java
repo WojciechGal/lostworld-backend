@@ -33,6 +33,6 @@ public class TravelPlanController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public TravelPlan addTravelPlan(@Valid @RequestBody TravelPlan travelPlan) {
-        return travelPlanService.add(travelPlan);
+        return travelPlanService.save(travelPlan);
     }
 }
