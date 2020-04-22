@@ -2,12 +2,10 @@ package pl.lostworld.lostworldbackend.templates.dbFile;
 
 import lombok.*;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.*;
 
 @Data
+@MappedSuperclass
 public class DBFile {
 
     public DBFile(String fileName, String fileType, byte[] data) {
@@ -21,7 +19,7 @@ public class DBFile {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String fileName;
 
