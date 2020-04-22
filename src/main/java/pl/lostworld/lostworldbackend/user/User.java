@@ -81,4 +81,7 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Report> reports = new ArrayList<>();
+
+    @ManyToMany
+    private List<User> observedUsers = new ArrayList<>();
 }
