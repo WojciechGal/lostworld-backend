@@ -49,6 +49,8 @@ public class TravelPlan {
     @ManyToMany
     private List<Relic> sequenceOfRelics = new ArrayList<>();
 
+    private String title;
+
     private String description;
 
     @OneToOne(mappedBy = "travelPlan")

@@ -25,5 +25,7 @@ public class Report {
     @OneToOne
     private TravelPlan travelPlan;
 
+    private String title;
+
     private String description;
 }
