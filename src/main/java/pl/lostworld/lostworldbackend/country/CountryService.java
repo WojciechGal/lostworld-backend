@@ -19,7 +19,7 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
-    public Country add(Country country) {
+    public Country save(Country country) {
         return countryRepository.save(country);
     }
 

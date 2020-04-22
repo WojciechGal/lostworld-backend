@@ -24,7 +24,7 @@ public class ReportService {
         return reportRepository.findById(id).orElse(null);
     }
 
-    public Report add(Report report) {
+    public Report save(Report report) {
         return reportRepository.save(report);
     }
 

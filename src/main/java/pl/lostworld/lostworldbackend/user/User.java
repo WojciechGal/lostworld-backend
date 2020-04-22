@@ -83,5 +83,6 @@ public class User {
     private List<Report> reports = new ArrayList<>();
 
     @ManyToMany
+    @JsonIgnore
     private List<User> observedUsers = new ArrayList<>();
 }

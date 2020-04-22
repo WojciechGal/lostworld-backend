@@ -20,7 +20,7 @@ public class TravelPlanService {
         return travelPlanRepository.findAll();
     }
 
-    public TravelPlan add(TravelPlan travelPlan) {
+    public TravelPlan save(TravelPlan travelPlan) {
         return travelPlanRepository.save(travelPlan);
     }
 

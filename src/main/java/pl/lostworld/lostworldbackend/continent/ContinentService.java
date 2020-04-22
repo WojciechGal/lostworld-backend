@@ -19,7 +19,7 @@ public class ContinentService {
         return continentRepository.findAll();
     }
 
-    public Continent add(Continent continent) {
+    public Continent save(Continent continent) {
         return continentRepository.save(continent);
     }
 
