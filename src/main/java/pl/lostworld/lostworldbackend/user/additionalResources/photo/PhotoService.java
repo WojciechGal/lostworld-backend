@@ -31,10 +31,6 @@ public class PhotoService implements DBFileService {
                 throw new FileSaveException("Filename contains invalid path sequence - " + fileName);
             }
 
-//            if (!file.matches(".+(\\.jpg|\\.png|\\.jpeg)")){
-//                throw new FileSaveException("File is not a ")
-//            }
-
             Photo photo = new Photo(fileName, file.getContentType(), file.getBytes());
 
             return photoRepository.save(photo);
