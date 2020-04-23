@@ -3,27 +3,40 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="../../resources/static/css/adminTemplates/standardAddForm.css"
-          th:href="@{/css/adminTemplates/standardAddForm.css}"/>
+    <link rel="stylesheet" href="../../static/css/admin/standardAddForm.css"
+          th:href="@{/static/css/admin/standardAddForm.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-    <title>Dodawanie kontynentu</title>
+    <title>Dodawanie kraju</title>
 </head>
 <body class="my-body">
 <h1>Panel Admina</h1>
 <div class="d-flex justify-content-center">
     <div class="alert alert-info col-sm-4 text-center">
-        <h3>Dodaj kontynent</h3>
-        <form action="#" th:action="@{/continents/add}" th:object="${continent}" method="post">
+        <h3>Dodaj kraj</h3>
+        <form action="#" th:action="@{/countries/add}" th:object="${country}" method="post">
             <div class="form-group d-flex justify-content-center">
                 <label for="inputName" class="col-sm-2 col-form-label">Nazwa:</label>
                 <div class="col-sm-6">
                     <input type="text" class="form-control" id="inputName" th:field="*{name}">
                     <div class="error">
                         <td th:if="${#fields.hasErrors('name')}" th:errors="*{name}">'name error message'</td>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <label for="inputName2" class="col-sm-3 col-form-label">Kontynenty:</label>
+                <div class="col-sm-6">
+                    <select multiple class="form-control" id="inputName2" th:field="*{continents}">
+                        <option th:each="continent : ${continents}"
+                                th:value="${continent.id}"
+                                th:utext="${continent.name}"/>
+                    </select>
+                    <div class="error">
+                        <td th:if="${#fields.hasErrors('continents')}" th:errors="*{continents}">'continents error message'</td>
                     </div>
                 </div>
             </div>
