@@ -1,6 +1,5 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.photo;
 
-import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@Log
 @RequestMapping("/photos")
 public class PhotoController {
 
