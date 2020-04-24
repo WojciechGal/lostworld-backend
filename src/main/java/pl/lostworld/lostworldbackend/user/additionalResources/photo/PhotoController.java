@@ -1,21 +1,10 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.photo;
 
 import lombok.extern.java.Log;
-import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.Resource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.lostworld.lostworldbackend.templates.dbFile.DBFile;
-import pl.lostworld.lostworldbackend.templates.dbFile.DBFileService;
-import pl.lostworld.lostworldbackend.templates.dbFile.UploadFileResponse;
 
-import java.io.FileNotFoundException;
-import java.util.Arrays;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,47 +13,36 @@ import java.util.stream.Collectors;
 @RequestMapping("/photos")
 public class PhotoController {
 
-   private DBFileService photoService;
+    private PhotoService photoService;
 
-    public PhotoController(DBFileService photoService) {
+    public PhotoController(PhotoService photoService) {
         this.photoService = photoService;
     }
 
+    @GetMapping("/upload")
+    public Photo uploadPhoto() {
+        return new Photo();
+    }
+
     @PostMapping("/upload")
-    public UploadFileResponse uploadPhoto(@RequestParam("file") MultipartFile photo) {
-        DBFile savedPhoto = photoService.save(photo);
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Photo uploadPhoto(@Valid @RequestBody Photo photo) {
+        return photoService.save(photo);
+    }
 
-        String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath()
-                .path("/photos/download/")
-                .path(savedPhoto.getId().toString())
-                .toUriString();
-
-        //return ResponseEntity.ok(new UploadFileResponse(savedPhoto.getFileName(), photo.getContentType(), photo.getSize()));
-        return new UploadFileResponse(savedPhoto.getFileName(), fileDownloadUri,
-                photo.getContentType(), photo.getSize());
+    @GetMapping("/multipleUpload")
+    public Photo uploadMultiplePhotos() {
+        return new Photo();
     }
 
     @PostMapping("/multipleUpload")
-    public List<UploadFileResponse> uploadMultiplePhotos(@RequestParam("files") MultipartFile[] photos) {
-        return Arrays.stream(photos).map(this::uploadPhoto).collect(Collectors.toList());
+    public List<Photo> uploadMultiplePhotos(@RequestBody List<Photo> photos) {
+        return photos.stream().map(this::uploadPhoto).collect(Collectors.toList());
     }
 
     @GetMapping("/download/{photoId}")
-    public ResponseEntity<Resource> downloadFile(@PathVariable String photoId) throws FileNotFoundException {
-        DBFile photo = photoService.checkById(Long.parseLong(photoId));
-
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(photo.getFileType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + photo.getFileName() + "\"")
-                .body(new ByteArrayResource(photo.getData()));
-    }
-
-    //TEST
-    @GetMapping("/test")
-    public ModelAndView test() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("file/photoTester");
-        return modelAndView;
+    public Photo downloadPhoto(@PathVariable Long photoId) {
+        return photoService.checkById(photoId);
     }
 
 }

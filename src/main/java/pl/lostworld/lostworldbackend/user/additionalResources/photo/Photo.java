@@ -1,19 +1,19 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.photo;
 
-import pl.lostworld.lostworldbackend.templates.dbFile.DBFile;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import pl.lostworld.lostworldbackend.templates.DBFile;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "photos")
+@Data
 public class Photo extends DBFile {
 
-    public Photo(String fileName, String contentType, byte[] bytes) {
-        super(fileName, contentType, bytes);
-    }
-
-    public Photo() {
-        super();
-    }
+    @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png)")
+    private String fileName;
 }

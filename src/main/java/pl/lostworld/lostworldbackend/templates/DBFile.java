@@ -1,21 +1,13 @@
-package pl.lostworld.lostworldbackend.templates.dbFile;
+package pl.lostworld.lostworldbackend.templates;
 
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 
 @Data
 @MappedSuperclass
 public class DBFile {
-
-    public DBFile(String fileName, String fileType, byte[] data) {
-        this.fileName = fileName;
-        this.fileType = fileType;
-        this.data = data;
-    }
-
-    public DBFile() {
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +19,8 @@ public class DBFile {
 
     @Lob
     private byte[] data;
+
+    //max 30 MB
+    @Max(31457280)
+    private long size;
 }
