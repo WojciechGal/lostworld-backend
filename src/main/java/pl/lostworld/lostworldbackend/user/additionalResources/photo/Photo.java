@@ -14,6 +14,7 @@ import javax.validation.constraints.Pattern;
 @Data
 public class Photo extends DBFile {
 
+    //przykrycie pola z klasy rodzicielskiej
     @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png)")
     private String fileName;
 }
