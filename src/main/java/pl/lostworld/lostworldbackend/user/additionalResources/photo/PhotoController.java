@@ -38,8 +38,8 @@ public class PhotoController {
         return photos.stream().map(this::uploadPhoto).collect(Collectors.toList());
     }
 
-    @GetMapping("/download/{photoId}")
-    public Photo downloadPhoto(@PathVariable Long photoId) {
+    @GetMapping("/get/{photoId}")
+    public Photo getPhoto(@PathVariable Long photoId) {
         return photoService.checkById(photoId);
     }
 
