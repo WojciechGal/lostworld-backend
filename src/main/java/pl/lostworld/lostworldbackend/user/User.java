@@ -10,6 +10,7 @@ import pl.lostworld.lostworldbackend.rating.continent.ContinentRating;
 import pl.lostworld.lostworldbackend.rating.country.CountryRating;
 import pl.lostworld.lostworldbackend.rating.relic.RelicRating;
 import pl.lostworld.lostworldbackend.role.Role;
+import pl.lostworld.lostworldbackend.user.additionalResources.article.Article;
 import pl.lostworld.lostworldbackend.user.additionalResources.plan.TravelPlan;
 import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
 import pl.lostworld.lostworldbackend.validator.user.UniqueUserField;
@@ -75,7 +76,8 @@ public class User {
     @JsonIgnore
     private List<RelicRating> relicRatingList = new ArrayList<>();
 
-    //users resources
+    //USERS RESOURCES
+
     @OneToMany(mappedBy = "user")
     private List<TravelPlan> travelPlans = new ArrayList<>();
 
@@ -85,4 +87,8 @@ public class User {
     @ManyToMany
     @JsonIgnore
     private List<User> observedUsers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    private List<Article> articles = new ArrayList<>();
+
 }
