@@ -91,4 +91,5 @@ public class User {
     @OneToMany(mappedBy = "user")
     private List<Article> articles = new ArrayList<>();
 
+    //todo lista odwiedzone kraje, znajomi
 }
