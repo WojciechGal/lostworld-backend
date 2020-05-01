@@ -31,15 +31,15 @@ public class Article {
 
     private String description;
 
-//    @ManyToMany
-//    private List<Continent> continents = new ArrayList<>();
-//
-//    @ManyToMany
-//    private List<Country> countries = new ArrayList<>();
-//
-//    @ManyToMany
-//    private List<City> cities = new ArrayList<>();
-//
-//    @ManyToMany
-//    private List<Relic> relics = new ArrayList<>();
+    @ManyToMany
+    private List<Continent> continents = new ArrayList<>();
+
+    @ManyToMany
+    private List<Country> countries = new ArrayList<>();
+
+    @ManyToMany
+    private List<City> cities = new ArrayList<>();
+
+    @ManyToMany
+    private List<Relic> relics = new ArrayList<>();
 }
