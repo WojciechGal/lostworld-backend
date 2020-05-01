@@ -69,7 +69,7 @@ public class UserController {
         log.info("Login successfull");
 
         String jwt = tokenProvider.generateToken(authentication);
-        log.info("Given token:" + jwt);
+        log.info("Given token: " + jwt);
 
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
