@@ -39,4 +39,5 @@ public class Report {
     private String description;
 
     //todo czy jesli relacja nie ma planu to powinna mieć encje terytorialne?
+    //todo może encje terytorialne osobno?
 }
