@@ -22,7 +22,6 @@ public class PhotoController {
         return new Photo();
     }
 
-    //todo sprawdzenie walidacji po stronie reacta
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Photo uploadPhoto(@Valid @RequestBody Photo photo) {

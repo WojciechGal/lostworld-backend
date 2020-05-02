@@ -15,6 +15,8 @@ import javax.validation.constraints.Pattern;
 public class Photo extends DBFile {
 
     //przykrycie pola z klasy rodzicielskiej
-    @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png)")
+    @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png|\\.JPG|\\.JPEG|\\.BMP|\\.PNG)")
     private String fileName;
+
+    //todo dodanie w przyszłości walidacji fileType
 }
