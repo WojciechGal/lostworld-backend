@@ -25,6 +25,7 @@ public class PhotoController {
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public Photo uploadPhoto(@Valid @RequestBody Photo photo) {
+        System.out.println("Saving...");
         return photoService.save(photo);
     }
 
