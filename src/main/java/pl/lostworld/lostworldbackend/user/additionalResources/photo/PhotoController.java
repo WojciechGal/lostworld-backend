@@ -1,14 +1,17 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.photo;
 
+import lombok.extern.java.Log;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
-import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/photos")
+@Log
 public class PhotoController {
 
     private PhotoService photoService;
@@ -17,26 +20,20 @@ public class PhotoController {
         this.photoService = photoService;
     }
 
-    @GetMapping("/upload")
-    public Photo uploadPhoto() {
-        return new Photo();
-    }
-
     @PostMapping("/upload")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public Photo uploadPhoto(@RequestBody Photo photo) {
-        System.out.println("Saving...");
-        return photoService.save(photo);
-    }
+    public String uploadPhoto(@RequestParam("photo") MultipartFile multipartPhoto) {
 
-    @GetMapping("/multipleUpload")
-    public Photo uploadMultiplePhotos() {
-        return new Photo();
+        log.warning("Controller...");
+
+        photoService.save(multipartPhoto);
+
+        return "ok";
     }
 
     @PostMapping("/multipleUpload")
-    public List<Photo> uploadMultiplePhotos(@RequestBody List<Photo> photos) {
-        return photos.stream().map(this::uploadPhoto).collect(Collectors.toList());
+    public List<String> uploadMultiplePhotos(@RequestParam("photos") MultipartFile[] photos) {
+        return Arrays.stream(photos).map(this::uploadPhoto).collect(Collectors.toList());
     }
 
     @GetMapping("/get/{photoId}")
