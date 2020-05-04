@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Data
@@ -22,14 +23,18 @@ public class DBFile {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
+    @NotNull
     private String fileName;
 
+    @NotNull
     private String fileType;
 
     @Lob
+    @NotNull
     private byte[] data;
 
     //max 30 MB
     @Max(31457280)
+    @NotNull
     private long size;
 }

@@ -6,6 +6,7 @@ import pl.lostworld.lostworldbackend.templates.DBFile;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,9 +15,13 @@ import javax.validation.constraints.Pattern;
 @Data
 public class Photo extends DBFile {
 
-    //przykrycie pola z klasy rodzicielskiej
+    //przykrycie pola z klasy DBFile
     @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png|\\.JPG|\\.JPEG|\\.BMP|\\.PNG)")
+    @NotNull
     private String fileName;
 
-    //todo dodanie w przyszłości walidacji fileType
+    //przykrycie pola z klasy DBFile
+    @Pattern(regexp = "(image/jpeg)|(image/jpg)|(image/png)|(image/bmp)")
+    @NotNull
+    private String fileType;
 }
