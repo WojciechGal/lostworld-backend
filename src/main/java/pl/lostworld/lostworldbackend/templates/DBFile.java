@@ -13,6 +13,11 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 public class DBFile {
 
+    public DBFile(byte[] bytes, long size) {
+        this.bytes = bytes;
+        this.size = size;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -33,8 +38,8 @@ public class DBFile {
     @NotNull
     private byte[] bytes;
 
-    //max 30 MB
-    @Max(31457280)
+    //max 10 MB
+    @Max(10485760)
     @NotNull
     private long size;
 }

@@ -6,14 +6,22 @@ import pl.lostworld.lostworldbackend.templates.DBFile;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.time.LocalDateTime;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "photos")
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class Photo extends DBFile {
+
+    public Photo(byte[] bytes, long size, String fileName, String fileType) {
+        super(bytes, size);
+        this.fileName = fileName;
+        this.fileType = fileType;
+    }
 
     //przykrycie pola z klasy DBFile
     @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png|\\.JPG|\\.JPEG|\\.BMP|\\.PNG)")
@@ -25,3 +33,4 @@ public class Photo extends DBFile {
     @NotNull
     private String fileType;
 }
+
