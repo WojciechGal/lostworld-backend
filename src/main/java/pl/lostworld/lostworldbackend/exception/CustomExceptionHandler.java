@@ -21,14 +21,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", status.value());
-
-        List<Pair<String, String>> errors = ex.getBindingResult()
+        body.put("errors", ex.getBindingResult()
                 .getFieldErrors()
                 .stream()
                 .map(err -> new Pair<>(err.getField(), err.getDefaultMessage()))
-                .collect(Collectors.toList());
-
-        body.put("errors", errors);
+                .collect(Collectors.toList()));
 
         return new ResponseEntity<>(body, headers, status);
     }

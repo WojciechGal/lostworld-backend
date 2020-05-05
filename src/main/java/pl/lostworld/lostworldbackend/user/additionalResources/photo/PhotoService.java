@@ -1,9 +1,6 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.photo;
 
 import lombok.extern.java.Log;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -45,42 +42,41 @@ public class PhotoService {
             Photo dbPhotoFile = new Photo(multipartPhoto.getBytes(), multipartPhoto.getSize(), multipartPhoto.getOriginalFilename(), multipartPhoto.getContentType());
 
             Set<ConstraintViolation<Photo>> violations = validator.validate(dbPhotoFile);
-            if (!violations.isEmpty()) {
-                HttpStatus status = HttpStatus.BAD_REQUEST;
-                Map<String, Object> body = new LinkedHashMap<>();
-                body.put("timestamp", new Date());
-                body.put("status", status.value());
 
-                List<Pair<String, String>> errors = violations
-                        .stream()
-                        .map(violation -> new Pair<>(violation.getPropertyPath().toString(), violation.getMessage()))
-                        .collect(Collectors.toList());
-
-                body.put("errors", errors);
-
-                return new ResponseEntity<>(body, status);
-            } else {
+            if (violations.isEmpty()) {
                 Long generatedId = photoRepository.save(dbPhotoFile).getId();
 
                 HttpStatus status = HttpStatus.ACCEPTED;
                 Map<String, Object> body = new LinkedHashMap<>();
                 body.put("timestamp", new Date());
                 body.put("status", status.value());
-                body.put("message", "Successfull, generated ID: " + generatedId);
+                body.put("message", "Photo saved with ID: " + generatedId);
+
+                return new ResponseEntity<>(body, status);
+            } else {
+                HttpStatus status = HttpStatus.BAD_REQUEST;
+                Map<String, Object> body = new LinkedHashMap<>();
+                body.put("timestamp", new Date());
+                body.put("status", status.value());
+                body.put("errors", violations
+                        .stream()
+                        .map(violation -> new Pair<>(violation.getPropertyPath().toString(), violation.getMessage()))
+                        .collect(Collectors.toList()));
 
                 return new ResponseEntity<>(body, status);
             }
 
         } catch (IOException e) {
-            log.warning("Error during processing files bytes!");
-            e.printStackTrace();
+            String message = "Error during processing files bytes";
 
+            log.warning(message);
+            e.printStackTrace();
 
             HttpStatus status = HttpStatus.I_AM_A_TEAPOT;
             Map<String, Object> body = new LinkedHashMap<>();
             body.put("timestamp", new Date());
             body.put("status", status.value());
-            body.put("message", "Error during processing files bytes!");
+            body.put("message", message);
 
             return new ResponseEntity<>(body, status);
         }
