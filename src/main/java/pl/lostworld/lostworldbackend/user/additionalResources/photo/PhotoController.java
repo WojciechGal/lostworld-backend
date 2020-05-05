@@ -28,7 +28,7 @@ public class PhotoController {
 
     @PostMapping("/multipleUpload")
     public List<ResponseEntity<Object>> uploadMultiplePhotos(@RequestParam("photos") MultipartFile[] multipartPhotos) {
-        //todo TEST
+        //todo do małej poprawy - zawsze zwraca 200
         return Arrays.stream(multipartPhotos).map(this::uploadPhoto).collect(Collectors.toList());
     }
 
