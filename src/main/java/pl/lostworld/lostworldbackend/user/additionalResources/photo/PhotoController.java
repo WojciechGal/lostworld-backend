@@ -25,7 +25,7 @@ public class PhotoController {
 
         log.warning("Controller...");
 
-        return photoService.validateMultipartConvertToPhotoAndSave(multipartPhoto);
+        return photoService.convertToPhotoValidateAndSave(multipartPhoto);
     }
 
     @PostMapping("/multipleUpload")

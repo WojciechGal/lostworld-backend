@@ -28,7 +28,7 @@ public class PhotoService {
         return photoRepository.findById(id).orElse(null);
     }
 
-    public ResponseEntity<Object> validateMultipartConvertToPhotoAndSave(MultipartFile multipartPhoto) {
+    public ResponseEntity<Object> convertToPhotoValidateAndSave(MultipartFile multipartPhoto) {
 
         log.warning("Service...");
 

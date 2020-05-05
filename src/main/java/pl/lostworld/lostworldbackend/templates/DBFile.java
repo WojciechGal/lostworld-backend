@@ -31,7 +31,7 @@ public class DBFile {
 
     @Lob
     @NotNull
-    private byte[] data;
+    private byte[] bytes;
 
     //max 30 MB
     @Max(31457280)
