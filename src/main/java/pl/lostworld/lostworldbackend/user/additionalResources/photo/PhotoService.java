@@ -39,7 +39,7 @@ public class PhotoService {
         dbPhotoFile.setSize(multipartPhoto.getSize());
 
         try {
-            dbPhotoFile.setData(multipartPhoto.getBytes());
+            dbPhotoFile.setBytes(multipartPhoto.getBytes());
         } catch (IOException e) {
             log.warning("Error during setting array of bites!");
             e.printStackTrace();
@@ -47,7 +47,7 @@ public class PhotoService {
 
         log.warning("Repo...");
 
-        return photoRepository.save(dbPhotoFile);
+        return new ResponseEntity<>(null);
     }
 
 }

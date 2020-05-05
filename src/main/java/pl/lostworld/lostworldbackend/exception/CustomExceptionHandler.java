@@ -10,6 +10,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import pl.lostworld.lostworldbackend.templates.Pair;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
@@ -21,10 +22,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         body.put("timestamp", new Date());
         body.put("status", status.value());
 
-        List<Pair<String, String>> errors = new LinkedList<>();
-        ex.getBindingResult().getFieldErrors().forEach((err) -> {
-            errors.add(new Pair<>(err.getField(), err.getDefaultMessage()));
-        });
+        List<Pair<String, String>> errors = ex.getBindingResult()
+                .getFieldErrors()
+                .stream()
+                .map(err -> new Pair<>(err.getField(), err.getDefaultMessage()))
+                .collect(Collectors.toList());
 
         body.put("errors", errors);
 
