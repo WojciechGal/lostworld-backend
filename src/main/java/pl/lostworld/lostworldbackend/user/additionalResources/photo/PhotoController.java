@@ -27,8 +27,9 @@ public class PhotoController {
     }
 
     @PostMapping("/multipleUpload")
-    public List<ResponseEntity<Object>> uploadMultiplePhotos(@RequestParam("photos") MultipartFile[] photos) {
-        return Arrays.stream(photos).map(this::uploadPhoto).collect(Collectors.toList());
+    public List<ResponseEntity<Object>> uploadMultiplePhotos(@RequestParam("photos") MultipartFile[] multipartPhotos) {
+        //todo TEST
+        return Arrays.stream(multipartPhotos).map(this::uploadPhoto).collect(Collectors.toList());
     }
 
     @GetMapping("/get/{photoId}")
