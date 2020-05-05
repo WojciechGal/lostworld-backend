@@ -34,6 +34,7 @@ public class PhotoController {
 
     @GetMapping("/get/{photoId}")
     public Photo getPhoto(@PathVariable Long photoId) {
+        //podczas produkcji JSON'a przez REST Controller dochodzi do automatycznej konwersji byte[] do String'a (base64)
         return photoService.checkById(photoId);
     }
 
