@@ -28,10 +28,8 @@ public class DBFile {
     @UpdateTimestamp
     private LocalDateTime updateDateTime;
 
-    @NotNull
     private String fileName;
 
-    @NotNull
     private String fileType;
 
     @Lob

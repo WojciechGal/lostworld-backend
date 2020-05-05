@@ -6,15 +6,13 @@ import pl.lostworld.lostworldbackend.templates.DBFile;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.time.LocalDateTime;
 
+@EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "photos")
 @Data
-@EqualsAndHashCode(callSuper = true)
 public class Photo extends DBFile {
 
     public Photo(byte[] bytes, long size, String fileName, String fileType) {
