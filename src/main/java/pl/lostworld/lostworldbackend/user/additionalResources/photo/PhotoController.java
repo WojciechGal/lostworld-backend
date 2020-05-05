@@ -22,7 +22,7 @@ public class PhotoController {
 
     @PostMapping("/upload")
     public ResponseEntity<Object> uploadPhoto(@RequestParam("photo") MultipartFile multipartPhoto) {
-        log.info("Photo uploading controller engaged!");
+        log.info("Photo uploading controller engaged");
         return photoService.convertToPhotoValidateAndSave(multipartPhoto);
     }
 
