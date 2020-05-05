@@ -18,6 +18,9 @@ public class DBFile {
         this.size = size;
     }
 
+    public DBFile() {
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

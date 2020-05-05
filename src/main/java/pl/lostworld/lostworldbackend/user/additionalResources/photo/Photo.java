@@ -21,6 +21,9 @@ public class Photo extends DBFile {
         this.fileType = fileType;
     }
 
+    public Photo() {
+    }
+
     //przykrycie pola z klasy DBFile
     @Pattern(regexp = ".+(\\.jpg|\\.jpeg|\\.bmp|\\.png|\\.JPG|\\.JPEG|\\.BMP|\\.PNG)")
     @NotNull
