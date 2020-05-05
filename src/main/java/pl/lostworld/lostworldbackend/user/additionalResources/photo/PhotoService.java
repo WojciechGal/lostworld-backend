@@ -1,6 +1,7 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.photo;
 
 import lombok.extern.java.Log;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,7 +28,7 @@ public class PhotoService {
         return photoRepository.findById(id).orElse(null);
     }
 
-    public Photo save(MultipartFile multipartPhoto) {
+    public ResponseEntity<Object> validateMultipartConvertToPhotoAndSave(MultipartFile multipartPhoto) {
 
         log.warning("Service...");
 
