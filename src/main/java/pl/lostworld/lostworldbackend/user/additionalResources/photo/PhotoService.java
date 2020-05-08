@@ -50,7 +50,7 @@ public class PhotoService {
                 Map<String, Object> body = new LinkedHashMap<>();
                 body.put("timestamp", new Date());
                 body.put("status", status.value());
-                body.put("message", "Photo saved with ID: " + generatedId);
+                body.put("id", generatedId);
 
                 return new ResponseEntity<>(body, status);
             } else {
