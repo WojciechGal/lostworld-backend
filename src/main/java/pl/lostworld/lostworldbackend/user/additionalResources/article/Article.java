@@ -32,14 +32,18 @@ public class Article {
     private String description;
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "continent_id"))
     private List<Continent> continents = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "country_id"))
     private List<Country> countries = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "city_id"))
     private List<City> cities = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "relic_id"))
     private List<Relic> relics = new ArrayList<>();
 }
