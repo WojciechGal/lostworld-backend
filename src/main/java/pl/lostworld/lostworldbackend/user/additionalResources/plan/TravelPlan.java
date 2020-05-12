@@ -38,15 +38,19 @@ public class TravelPlan {
     private LocalDateTime updateDateTime;
 
     @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "continent_in_sequence_id"))
     private List<Continent> sequenceOfContinents = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "country_in_sequence_id"))
     private List<Country> sequenceOfCountries = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "city_in_sequence_id"))
     private List<City> sequenceOfCities = new ArrayList<>();
 
     @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "relic_in_sequence_id"))
     private List<Relic> sequenceOfRelics = new ArrayList<>();
 
     private String title;
