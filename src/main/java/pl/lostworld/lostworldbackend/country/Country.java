@@ -34,6 +34,7 @@ public class Country {
     private String name;
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "country_id"), inverseJoinColumns = @JoinColumn(name = "continent_id"))
     @NotEmpty
     @JsonIgnore
     private List<Continent> continents = new ArrayList<>();
