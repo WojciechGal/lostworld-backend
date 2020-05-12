@@ -33,5 +33,7 @@ public class Photo extends DBFile {
     @Pattern(regexp = "(image/jpeg)|(image/jpg)|(image/png)|(image/bmp)")
     @NotNull
     private String fileType;
+
+    //todo po testach, gdy front będzie gotowy trzeba dodać encję użytkownika
 }
 
