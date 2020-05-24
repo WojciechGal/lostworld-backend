@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pl.lostworld.lostworldbackend.templates.Pair;
+import pl.lostworld.lostworldbackend.user.additionalResources.album.AlbumService;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -23,9 +24,12 @@ public class PhotoService {
 
     private PhotoRepository photoRepository;
 
-    public PhotoService(Validator validator, PhotoRepository photoRepository) {
+    private AlbumService albumService;
+
+    public PhotoService(Validator validator, PhotoRepository photoRepository, AlbumService albumService) {
         this.validator = validator;
         this.photoRepository = photoRepository;
+        this.albumService = albumService;
     }
 
     public List<Photo> checkAll() {
@@ -39,7 +43,8 @@ public class PhotoService {
     public ResponseEntity<Object> convertToPhotoValidateAndSave(MultipartFile multipartPhoto) {
 
         try {
-            Photo dbPhotoFile = new Photo(multipartPhoto.getBytes(), multipartPhoto.getSize(), multipartPhoto.getOriginalFilename(), multipartPhoto.getContentType());
+            Photo dbPhotoFile = new Photo(multipartPhoto.getBytes(), multipartPhoto.getSize(), multipartPhoto.getOriginalFilename(), multipartPhoto.getContentType(), albumService.checkById(1L));
+            //todo KONIECZNA modyfikacja -> album jest hardcodowany
 
             Set<ConstraintViolation<Photo>> violations = validator.validate(dbPhotoFile);
 
