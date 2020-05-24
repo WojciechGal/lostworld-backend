@@ -44,7 +44,7 @@ public class UserController {
     }
 
     @GetMapping("/sec")
-    public String test() {
+    public String sec() {
         SecurityContext context = SecurityContextHolder.getContext();
         return context.getAuthentication().getName();
     }
