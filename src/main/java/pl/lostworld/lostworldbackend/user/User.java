@@ -38,13 +38,11 @@ public class User {
 
     @NotBlank
     @UniqueUserField(column = "username")
-    @Column(nullable = false, unique = true)
     private String username;
 
     @Email
     @NotBlank
     @UniqueUserField(column = "email")
-    @Column(nullable = false, unique = true)
     private String email;
 
     @NotBlank
