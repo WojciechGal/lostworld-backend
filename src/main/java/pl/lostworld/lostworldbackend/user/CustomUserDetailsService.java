@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import pl.lostworld.lostworldbackend.exception.authentication.UseridNotFoundException;
+import pl.lostworld.lostworldbackend.exception.authentication.UserIdNotFoundException;
 
 public class CustomUserDetailsService implements UserDetailsService {
 
@@ -26,7 +26,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         User user = userService.findUserById(id);
 
         if (user == null) {
-            throw new UseridNotFoundException(id.toString());
+            throw new UserIdNotFoundException(id.toString());
         }
 
         return CurrentUser.create(user);

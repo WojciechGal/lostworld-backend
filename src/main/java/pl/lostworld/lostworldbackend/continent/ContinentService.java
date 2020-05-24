@@ -19,8 +19,11 @@ public class ContinentService {
         return continentRepository.findAll();
     }
 
-    public Continent addContinent(Continent continent) {
+    public Continent save(Continent continent) {
         return continentRepository.save(continent);
     }
 
+    public Continent checkById(Long id) {
+        return continentRepository.findById(id).orElse(null);
+    }
 }

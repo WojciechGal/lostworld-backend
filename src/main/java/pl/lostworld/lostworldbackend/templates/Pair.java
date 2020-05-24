@@ -1,4 +1,4 @@
-package pl.lostworld.lostworldbackend.internalTemplates;
+package pl.lostworld.lostworldbackend.templates;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -32,7 +32,7 @@ public class CountryController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public Country addCountry(@Valid @RequestBody Country country) {
-        return countryService.addCountry(country);
+        return countryService.save(country);
     }
 
     ///////////////DEPRECATED/////////////////

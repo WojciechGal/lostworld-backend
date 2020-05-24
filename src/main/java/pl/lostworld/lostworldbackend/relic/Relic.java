@@ -8,6 +8,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.city.City;
 import pl.lostworld.lostworldbackend.rating.relic.RelicRating;
+import pl.lostworld.lostworldbackend.user.additionalResources.article.Article;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -45,4 +46,7 @@ public class Relic {
     private List<RelicRating> relicRatingList = new ArrayList<>();
 
     private String description;
+
+    @ManyToMany(mappedBy = "relics")
+    private List<Article> articles = new ArrayList<>();
 }

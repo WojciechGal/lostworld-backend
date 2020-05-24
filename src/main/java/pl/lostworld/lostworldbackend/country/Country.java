@@ -9,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.city.City;
 import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.rating.country.CountryRating;
+import pl.lostworld.lostworldbackend.user.additionalResources.article.Article;
 import pl.lostworld.lostworldbackend.validator.country.UniqueCountryField;
 
 import javax.persistence.*;
@@ -33,6 +34,7 @@ public class Country {
     private String name;
 
     @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "country_id"), inverseJoinColumns = @JoinColumn(name = "continent_id"))
     @NotEmpty
     @JsonIgnore
     private List<Continent> continents = new ArrayList<>();
@@ -52,4 +54,7 @@ public class Country {
     private List<City> cities = new ArrayList<>();
 
     private String description;
+
+    @ManyToMany(mappedBy = "countries")
+    private List<Article> articles = new ArrayList<>();
 }
