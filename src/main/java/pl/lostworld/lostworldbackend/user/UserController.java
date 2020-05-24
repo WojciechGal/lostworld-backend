@@ -35,6 +35,7 @@ public class UserController {
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
     public Object createUser(@Valid @RequestBody User user) {
+        //todo należy zunifikować zwracane obiekty na response entity
         return userService.saveUser(user);
     }
 
