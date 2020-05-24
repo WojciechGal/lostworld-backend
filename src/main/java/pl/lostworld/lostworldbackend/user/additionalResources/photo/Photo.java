@@ -17,10 +17,11 @@ import javax.validation.constraints.Pattern;
 @Data
 public class Photo extends DBFile {
 
-    public Photo(byte[] bytes, long size, String fileName, String fileType) {
+    public Photo(byte[] bytes, long size, String fileName, String fileType, Album album) {
         super(bytes, size);
         this.fileName = fileName;
         this.fileType = fileType;
+        this.album = album;
     }
 
     public Photo() {
