@@ -14,6 +14,7 @@ import pl.lostworld.lostworldbackend.rating.country.CountryRating;
 import pl.lostworld.lostworldbackend.rating.relic.RelicRating;
 import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.role.Role;
+import pl.lostworld.lostworldbackend.user.additionalResources.album.Album;
 import pl.lostworld.lostworldbackend.user.additionalResources.article.Article;
 import pl.lostworld.lostworldbackend.user.additionalResources.plan.TravelPlan;
 import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
@@ -110,6 +111,7 @@ public class User {
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "visited_relic_id"))
     private List<Relic> visitedRelics = new ArrayList<>();
 
+    /////////////////////////////////////////////////////////////////////////////
     //todo wprowadzenie oczekiwania przyjęcia do znajomych / oraz znajmoych
     //todo wymaga przetestowania
 
@@ -126,4 +128,8 @@ public class User {
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "friend_user_id"))
     @JsonIgnore
     private List<User> friends = new ArrayList<>();
+    /////////////////////////////////////////////////////////////////////////////
+
+    @OneToMany(mappedBy = "user")
+    private List<Album> albums = new ArrayList<>();
 }
