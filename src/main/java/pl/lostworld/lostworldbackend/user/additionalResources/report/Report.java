@@ -41,7 +41,7 @@ public class Report {
 
     private String description;
 
-    @OneToMany
+    @OneToMany(mappedBy = "report")
     private List<Album> albums = new ArrayList<>();
 
     //todo czy jesli relacja nie ma planu to powinna mieć encje terytorialne?
