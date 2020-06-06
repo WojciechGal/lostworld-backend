@@ -78,6 +78,7 @@ public class UserController {
 
     //todo co z wylogowywaniem? - dokumentacja wskazuje, że jwt tokena po stronie backendu się nie usuwa
 
+    //TEST
     //pobieranie testowe danych zalogowanego użytkownika
     @GetMapping("/getObservedUsers")
     public List<User> getObservedUsers(@AuthenticationPrincipal CurrentUser currentUser) {
