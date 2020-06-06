@@ -130,4 +130,6 @@ public class User {
     @JsonIgnore
     private List<User> friends = new ArrayList<>();
     /////////////////////////////////////////////////////////////////////////////
+
+    //todo należy wprowadzić zapis wiadomości pomiędzy uzytkownikami, którzy są znajomymi
 }
