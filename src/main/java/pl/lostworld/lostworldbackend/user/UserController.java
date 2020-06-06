@@ -57,6 +57,7 @@ public class UserController {
         return allUsers;
     }
 
+    //token po stronie backend'u nie jest usuwany
     @PostMapping("/login")
     public ResponseEntity loginUser(@RequestBody LoginTemplate loginTemplate) {
         log.info(loginTemplate.getUsername() + " is trying to login...");
@@ -75,8 +76,6 @@ public class UserController {
 
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
-
-    //todo co z wylogowywaniem? - dokumentacja wskazuje, że jwt tokena po stronie backendu się nie usuwa
 
     //TEST
     //pobieranie testowe danych zalogowanego użytkownika
