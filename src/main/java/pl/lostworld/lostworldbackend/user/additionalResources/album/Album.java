@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.lostworld.lostworldbackend.city.City;
+import pl.lostworld.lostworldbackend.continent.Continent;
+import pl.lostworld.lostworldbackend.country.Country;
+import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.user.User;
 import pl.lostworld.lostworldbackend.user.additionalResources.photo.Photo;
 import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
@@ -44,7 +48,21 @@ public class Album {
     @OneToMany(mappedBy = "album")
     private List<Photo> photos = new ArrayList<>();
 
-    //todo czy jesli album nie ma reportażu to powinien mieć encje terytorialne?
-    //todo może encje terytorialne osobno?
+    //encje terytorialne powinny być pobierane od report, a jeśli takiego nie ma - ustawiane osobno
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "continent_in_sequence_id"))
+    private List<Continent> sequenceOfContinents = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "country_in_sequence_id"))
+    private List<Country> sequenceOfCountries = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "city_in_sequence_id"))
+    private List<City> sequenceOfCities = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "relic_in_sequence_id"))
+    private List<Relic> sequenceOfRelics = new ArrayList<>();
 }
 
