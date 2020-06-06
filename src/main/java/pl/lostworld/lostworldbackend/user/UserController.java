@@ -79,6 +79,7 @@ public class UserController {
 
     //TEST
     //pobieranie testowe danych zalogowanego użytkownika
+    //todo należy określić rodzaj globalnej komunikacji z front'em
     @GetMapping("/getObservedUsers")
     public List<User> getObservedUsers(@AuthenticationPrincipal CurrentUser currentUser) {
         return userService.findUserById(currentUser.getId()).getObservedUsers();
