@@ -111,10 +111,11 @@ public class User {
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "visited_relic_id"))
     private List<Relic> visitedRelics = new ArrayList<>();
 
-    /////////////////////////////////////////////////////////////////////////////
-    //todo wprowadzenie oczekiwania przyjęcia do znajomych / oraz znajmoych
-    //todo wymaga przetestowania
+    @OneToMany(mappedBy = "user")
+    private List<Album> albums = new ArrayList<>();
 
+    /////////////////////////////////////////////////////////////////////////////
+    //wprowadzenie oczekiwania przyjęcia do znajomych / oraz znajmoych
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "expected_user_id"))
     @JsonIgnore
@@ -129,7 +130,4 @@ public class User {
     @JsonIgnore
     private List<User> friends = new ArrayList<>();
     /////////////////////////////////////////////////////////////////////////////
-
-    @OneToMany(mappedBy = "user")
-    private List<Album> albums = new ArrayList<>();
 }
