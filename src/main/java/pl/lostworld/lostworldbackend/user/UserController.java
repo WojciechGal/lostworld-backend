@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.authentication.JwtAuthenticationResponse;
 import pl.lostworld.lostworldbackend.authentication.JwtTokenProvider;
 import pl.lostworld.lostworldbackend.templates.LoginTemplate;
+import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -76,5 +77,11 @@ public class UserController {
     }
 
     //todo co z wylogowywaniem? - dokumentacja wskazuje, że jwt tokena po stronie backendu się nie usuwa
+
+    //pobieranie testowe danych zalogowanego użytkownika
+    @GetMapping("/getObservedUsers")
+    public List<User> getObservedUsers(@AuthenticationPrincipal CurrentUser currentUser) {
+        return userService.findUserById(currentUser.getId()).getObservedUsers();
+    }
 
 }
