@@ -4,6 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import pl.lostworld.lostworldbackend.city.City;
+import pl.lostworld.lostworldbackend.continent.Continent;
+import pl.lostworld.lostworldbackend.country.Country;
+import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.user.User;
 import pl.lostworld.lostworldbackend.user.additionalResources.album.Album;
 import pl.lostworld.lostworldbackend.user.additionalResources.plan.TravelPlan;
@@ -44,6 +48,20 @@ public class Report {
     @OneToMany(mappedBy = "report")
     private List<Album> albums = new ArrayList<>();
 
-    //todo czy jesli relacja nie ma planu to powinna mieć encje terytorialne?
-    //todo może encje terytorialne osobno?
+    //encje terytorialne powinny być pobierane od travelPlan, a jeśli takiego nie ma - ustawiane osobno
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "continent_in_sequence_id"))
+    private List<Continent> sequenceOfContinents = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "country_in_sequence_id"))
+    private List<Country> sequenceOfCountries = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "city_in_sequence_id"))
+    private List<City> sequenceOfCities = new ArrayList<>();
+
+    @ManyToMany
+    @JoinTable(inverseJoinColumns = @JoinColumn(name = "relic_in_sequence_id"))
+    private List<Relic> sequenceOfRelics = new ArrayList<>();
 }
