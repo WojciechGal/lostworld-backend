@@ -2,6 +2,8 @@ package pl.lostworld.lostworldbackend.user.additionalResources.article;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import pl.lostworld.lostworldbackend.city.City;
 import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.country.Country;
@@ -10,6 +12,7 @@ import pl.lostworld.lostworldbackend.user.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,12 @@ public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @CreationTimestamp
+    private LocalDateTime createDateTime;
+
+    @UpdateTimestamp
+    private LocalDateTime updateDateTime;
 
     @ManyToOne
     @NotNull
