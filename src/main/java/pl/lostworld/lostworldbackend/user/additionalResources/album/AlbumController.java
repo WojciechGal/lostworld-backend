@@ -24,7 +24,7 @@ public class AlbumController {
     //todo podobnie jak w innych klasach tutaj trzeba dodac metode z authentication principal z reportController
     //todo PRAWDOPODOBNIE wymagana będzie modyfikacja w związku z wysyłaniem null'owych obiektów przez JsonIgnore
     //todo lub odpowiednie ustawienie operacji kaskadowych
-    //todo do decyzji i dyskucji z frontem
+    //todo do decyzji i dyskusji z frontem
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
