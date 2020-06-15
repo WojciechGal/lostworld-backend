@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByUsername(String username) {
         User user =  userRepository.findByUsername(username);
-        Hibernate.initialize(user.getContinentRatingList());
-        Hibernate.initialize(user.getCountryRatingList());
+//        Hibernate.initialize(user.getContinentRatingList());
+//        Hibernate.initialize(user.getCountryRatingList());
         return user;
     }
 
@@ -45,8 +45,9 @@ public class UserServiceImpl implements UserService {
     public User findUserById(Long id) {
         User user =  userRepository.findById(id).orElse(null);
         //brak zabezpieczenia przed null'ami
-        Hibernate.initialize(user.getContinentRatingList());
-        Hibernate.initialize(user.getCountryRatingList());
+
+//        Hibernate.initialize(user.getContinentRatingList());
+//        Hibernate.initialize(user.getCountryRatingList());
         return user;
     }
 
