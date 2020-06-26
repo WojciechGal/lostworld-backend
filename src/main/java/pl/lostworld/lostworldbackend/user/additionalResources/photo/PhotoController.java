@@ -21,13 +21,13 @@ public class PhotoController {
     }
 
     @PostMapping("/upload")
-    public ResponseEntity<Object> uploadPhoto(@RequestParam("photo") MultipartFile multipartPhoto) {
+    public ResponseEntity<?> uploadPhoto(@RequestParam("photo") MultipartFile multipartPhoto) {
         log.info("Photo uploading controller engaged");
         return photoService.convertToPhotoValidateAndSave(multipartPhoto);
     }
 
     @PostMapping("/multipleUpload")
-    public List<ResponseEntity<Object>> uploadMultiplePhotos(@RequestParam("photos") MultipartFile[] multipartPhotos) {
+    public List<ResponseEntity<?>> uploadMultiplePhotos(@RequestParam("photos") MultipartFile[] multipartPhotos) {
         //zawsze zwraca status 200 - dokładne statusy odpowiedzi znajdują wewnątrz obiektów
         return Arrays.stream(multipartPhotos).map(this::uploadPhoto).collect(Collectors.toList());
     }

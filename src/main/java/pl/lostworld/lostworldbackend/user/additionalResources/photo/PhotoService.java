@@ -40,7 +40,7 @@ public class PhotoService {
         return photoRepository.findById(id).orElse(null);
     }
 
-    public ResponseEntity<Object> convertToPhotoValidateAndSave(MultipartFile multipartPhoto) {
+    public ResponseEntity<?> convertToPhotoValidateAndSave(MultipartFile multipartPhoto) {
 
         try {
             Photo dbPhotoFile = new Photo(multipartPhoto.getBytes(), multipartPhoto.getSize(), multipartPhoto.getOriginalFilename(), multipartPhoto.getContentType(), albumService.checkById(1L));
