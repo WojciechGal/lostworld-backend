@@ -1,6 +1,9 @@
 package pl.lostworld.lostworldbackend.user;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -89,7 +92,8 @@ public class User {
 
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "observed_user_id"))
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<User> observedUsers = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
