@@ -59,7 +59,7 @@ public class UserController {
 
     //token po stronie backend'u nie jest usuwany
     @PostMapping("/login")
-    public ResponseEntity loginUser(@RequestBody LoginTemplate loginTemplate) {
+    public ResponseEntity<?> loginUser(@RequestBody LoginTemplate loginTemplate) {
         log.info(loginTemplate.getUsername() + " is trying to login...");
 
         Authentication authentication = authenticationManager.authenticate(

@@ -29,7 +29,7 @@ public class ResponseUtils {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", HttpStatus.OK.value());
-        body.put("object", response);
+        body.put("response", response);
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
