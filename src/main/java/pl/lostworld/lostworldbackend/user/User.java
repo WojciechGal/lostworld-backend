@@ -122,16 +122,19 @@ public class User {
     //wprowadzenie oczekiwania przyjęcia do znajomych / oraz znajmoych
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "expected_user_id"))
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<User> expectedUsers = new ArrayList<>();
 
     @ManyToMany(mappedBy = "expectedUsers")
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<User> pendingUsers = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "friend_user_id"))
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<User> friends = new ArrayList<>();
     /////////////////////////////////////////////////////////////////////////////
 
