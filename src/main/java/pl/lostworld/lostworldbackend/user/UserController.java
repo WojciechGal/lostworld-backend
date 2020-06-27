@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.authentication.JwtAuthenticationResponse;
 import pl.lostworld.lostworldbackend.authentication.JwtTokenProvider;
 import pl.lostworld.lostworldbackend.templates.LoginTemplate;
-import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
+import pl.lostworld.lostworldbackend.utils.ResponseUtils;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -77,12 +77,21 @@ public class UserController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    //TEST
-    //pobieranie testowe danych zalogowanego użytkownika
-    //todo należy określić rodzaj globalnej komunikacji z front'em
-    @GetMapping("/getObservedUsers")
-    public List<User> getObservedUsers(@AuthenticationPrincipal CurrentUser currentUser) {
-        return userService.findUserById(currentUser.getId()).getObservedUsers();
+    ///////////////////////////////// KOMUNIKACJA USER'A/////////////////////////////////////////
+
+    @GetMapping("/checkLogged")
+    public ResponseEntity<?> checkLoggedUser(@AuthenticationPrincipal CurrentUser currentUser) {
+        return ResponseUtils.designOkResponse(userService.findUserById(currentUser.getId()));
     }
 
+    @GetMapping("/check/{id}")
+    public ResponseEntity<?> checkUser(@PathVariable Long id) {
+        return ResponseUtils.designOkResponse(userService.findUserById(id));
+    }
+
+    @PostMapping("/check")
+    public ResponseEntity<?> checkUsers(@RequestParam(required=true) List<Long> usersIds) {
+        return ResponseUtils.designOkResponse()
+                //todo jedno zapytanie do bazy
+    }
 }
