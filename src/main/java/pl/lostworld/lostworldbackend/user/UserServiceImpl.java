@@ -1,6 +1,5 @@
 package pl.lostworld.lostworldbackend.user;
 
-import org.hibernate.Hibernate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,10 +25,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findUserByUsername(String username) {
-        User user =  userRepository.findByUsername(username);
+//        User user =  userRepository.findByUsername(username);
 //        Hibernate.initialize(user.getContinentRatingList());
 //        Hibernate.initialize(user.getCountryRatingList());
-        return user;
+        return userRepository.findByUsername(username);
     }
 
     @Override
@@ -37,18 +36,16 @@ public class UserServiceImpl implements UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
+        user.setRoles(new HashSet<Role>(Collections.singletonList(userRole)));
         return userRepository.save(user);
     }
 
     @Override
     public User findUserById(Long id) {
-        User user =  userRepository.findById(id).orElse(null);
-        //brak zabezpieczenia przed null'ami
-
+//        User user =  userRepository.findById(id).orElse(null);
 //        Hibernate.initialize(user.getContinentRatingList());
 //        Hibernate.initialize(user.getCountryRatingList());
-        return user;
+        return userRepository.findById(id).orElse(null);
     }
 
     @Override
