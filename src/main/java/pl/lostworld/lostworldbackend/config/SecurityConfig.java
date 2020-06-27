@@ -37,6 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                     .antMatchers("/users/check").authenticated()
                     //todo usunąć pierdoły z testowaniem logowania/dodać zabezpieczenia
+                    //todo UP!
 
                     .antMatchers("/continents/add").hasRole("ADMIN")
                     .antMatchers("/countries/add").authenticated()
