@@ -13,4 +13,6 @@ public interface UserService {
     public void deleteUserById(Long id);
 
     public List<User> findAllUsers();
+
+    public List<User> findAllById(List<Long> ids);
 }
