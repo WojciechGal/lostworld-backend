@@ -40,7 +40,7 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @GetMapping("/check")
+    @GetMapping("/user")
     public User check(@AuthenticationPrincipal CurrentUser currentUser) {
         return currentUser.getActualUser();
     }
@@ -77,8 +77,6 @@ public class UserController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    ///////////////////////////////// KOMUNIKACJA USER'A/////////////////////////////////////////
-
     @GetMapping("/checkLogged")
     public ResponseEntity<?> checkLoggedUser(@AuthenticationPrincipal CurrentUser currentUser) {
         return ResponseUtils.designOkResponse(userService.findUserById(currentUser.getId()));
@@ -89,9 +87,14 @@ public class UserController {
         return ResponseUtils.designOkResponse(userService.findUserById(id));
     }
 
-    @PostMapping("/check")
-    public ResponseEntity<?> checkUsers(@RequestParam(required=true) List<Long> usersIds) {
-        return ResponseUtils.designOkResponse()
-                //todo jedno zapytanie do bazy
+//    Wariacja powyższego
+//    @GetMapping("/check")
+//    public ResponseEntity<?> checkUser(@RequestParam Long id) {
+//        return ResponseUtils.designOkResponse(userService.findUserById(id));
+//    }
+
+    @PostMapping("/checkMany")
+    public ResponseEntity<?> checkUsers(@RequestBody List<Long> ids) {
+        return ResponseUtils.designOkResponse(userService.findAllById(ids));
     }
 }
