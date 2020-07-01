@@ -40,11 +40,13 @@ public class UserController {
         return userService.saveUser(user);
     }
 
+    //Test #1
     @GetMapping("/user")
     public User check(@AuthenticationPrincipal CurrentUser currentUser) {
         return currentUser.getActualUser();
     }
 
+    //Test #2
     @GetMapping("/sec")
     public String sec() {
         SecurityContext context = SecurityContextHolder.getContext();
