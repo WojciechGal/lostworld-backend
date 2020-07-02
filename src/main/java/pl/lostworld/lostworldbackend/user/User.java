@@ -2,7 +2,6 @@ package pl.lostworld.lostworldbackend.user;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
@@ -67,19 +66,23 @@ public class User {
     private LocalDateTime updateDateTime;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<ContinentRating> continentRatingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<CountryRating> countryRatingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<CityRating> cityRatingList = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<RelicRating> relicRatingList = new ArrayList<>();
 
     //USERS RESOURCES
@@ -101,18 +104,26 @@ public class User {
 
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "visited_continent_id"))
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<Continent> visitedContinents = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "visited_country_id"))
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<Country> visitedCountries = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "visited_city_id"))
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<City> visitedCities = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(inverseJoinColumns = @JoinColumn(name = "visited_relic_id"))
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<Relic> visitedRelics = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
