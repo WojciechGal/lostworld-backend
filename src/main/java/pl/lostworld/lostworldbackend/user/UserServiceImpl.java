@@ -24,9 +24,10 @@ public class UserServiceImpl implements UserService {
     }
 
     /*
-    inicjalizacja hibernate'a  umożliwiała wykorzystanie obiektu user w obiekcie current user z authentication
-    principal ze wzgledu na koniecznosc dodatkowych inicjalizacji lub odgórnego fetchowanie w trybie EAGER - w
-    kontrolerze następuje wczytanie obiektu usera z id currentuser'a
+    inicjalizacja hibernate'a umożliwiała wykorzystanie obiektu user w obiekcie current user z authentication
+    principal, ze wzgledu na koniecznosc dodatkowych inicjalizacji lub odgórne fetchowanie w trybie EAGER - w
+    kontrolerze następuje wczytanie obiektu usera z id currentuser'a - podczas serializacji na json'a dane
+    są automatycznie dociągane
     todo jest to miejsce ewentualnej optymalizacji
      */
 
