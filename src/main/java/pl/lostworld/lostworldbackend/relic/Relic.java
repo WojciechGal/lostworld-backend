@@ -1,7 +1,6 @@
 package pl.lostworld.lostworldbackend.relic;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,11 +37,11 @@ public class Relic {
 
     @ManyToOne
     @NotNull
-    @JsonBackReference
     private City city;
 
     @OneToMany(mappedBy = "relic")
-    @JsonIgnore
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private List<RelicRating> relicRatingList = new ArrayList<>();
 
     private String description;
