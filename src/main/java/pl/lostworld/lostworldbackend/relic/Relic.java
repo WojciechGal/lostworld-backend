@@ -37,6 +37,8 @@ public class Relic {
 
     @ManyToOne
     @NotNull
+    @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
+    @JsonIdentityReference(alwaysAsId=true)
     private City city;
 
     @OneToMany(mappedBy = "relic")
