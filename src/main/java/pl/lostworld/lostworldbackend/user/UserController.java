@@ -89,12 +89,6 @@ public class UserController {
         return ResponseUtils.designOkResponse(userService.findUserById(id));
     }
 
-//    Wariacja powyższego
-//    @GetMapping("/check")
-//    public ResponseEntity<?> checkUser(@RequestParam Long id) {
-//        return ResponseUtils.designOkResponse(userService.findUserById(id));
-//    }
-
     @PostMapping("/checkMany")
     public ResponseEntity<?> checkUsers(@RequestBody List<Long> ids) {
         return ResponseUtils.designOkResponse(userService.findAllById(ids));
