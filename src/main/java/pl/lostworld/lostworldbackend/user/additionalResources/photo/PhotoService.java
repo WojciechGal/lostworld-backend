@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import pl.lostworld.lostworldbackend.templates.Pair;
 import pl.lostworld.lostworldbackend.user.additionalResources.album.AlbumService;
+import pl.lostworld.lostworldbackend.utils.ResponseUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -49,26 +50,12 @@ public class PhotoService {
             Set<ConstraintViolation<Photo>> violations = validator.validate(dbPhotoFile);
 
             if (violations.isEmpty()) {
-                Long generatedId = photoRepository.save(dbPhotoFile).getId();
-
-                HttpStatus status = HttpStatus.CREATED;
-                Map<String, Object> body = new LinkedHashMap<>();
-                body.put("timestamp", new Date());
-                body.put("status", status.value());
-                body.put("id", generatedId);
-
-                return new ResponseEntity<>(body, status);
+                return ResponseUtils.designCreatedResponse(photoRepository.save(dbPhotoFile).getId());
             } else {
-                HttpStatus status = HttpStatus.BAD_REQUEST;
-                Map<String, Object> body = new LinkedHashMap<>();
-                body.put("timestamp", new Date());
-                body.put("status", status.value());
-                body.put("errors", violations
+                return ResponseUtils.designBadRequestResponse(violations
                         .stream()
                         .map(violation -> new Pair<>(violation.getPropertyPath().toString(), violation.getMessage()))
                         .collect(Collectors.toList()));
-
-                return new ResponseEntity<>(body, status);
             }
 
         } catch (IOException e) {
@@ -77,13 +64,7 @@ public class PhotoService {
             log.warning(message);
             e.printStackTrace();
 
-            HttpStatus status = HttpStatus.I_AM_A_TEAPOT;
-            Map<String, Object> body = new LinkedHashMap<>();
-            body.put("timestamp", new Date());
-            body.put("status", status.value());
-            body.put("message", message);
-
-            return new ResponseEntity<>(body, status);
+            return ResponseUtils.designIAmATeapotResponse(message);
         }
     }
 
