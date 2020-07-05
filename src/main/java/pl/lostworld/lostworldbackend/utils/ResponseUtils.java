@@ -11,7 +11,12 @@ public class ResponseUtils {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", HttpStatus.CREATED.value());
-        body.put("object", createdObject);
+
+        if (Long.class.equals(createdObject.getClass())) {
+            body.put("id", createdObject);
+        } else {
+            body.put("object", createdObject);
+        }
 
         return new ResponseEntity<>(body, HttpStatus.CREATED);
     }
@@ -38,7 +43,7 @@ public class ResponseUtils {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", HttpStatus.BAD_REQUEST.value());
-        body.put("response", response);
+        body.put("errors", response);
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
@@ -47,7 +52,7 @@ public class ResponseUtils {
         Map<String, Object> body = new LinkedHashMap<>();
         body.put("timestamp", new Date());
         body.put("status", HttpStatus.I_AM_A_TEAPOT.value());
-        body.put("response", response);
+        body.put("message", response);
 
         return new ResponseEntity<>(body, HttpStatus.I_AM_A_TEAPOT);
     }
