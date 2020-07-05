@@ -51,7 +51,7 @@ public class PhotoService {
             if (violations.isEmpty()) {
                 Long generatedId = photoRepository.save(dbPhotoFile).getId();
 
-                HttpStatus status = HttpStatus.ACCEPTED;
+                HttpStatus status = HttpStatus.CREATED;
                 Map<String, Object> body = new LinkedHashMap<>();
                 body.put("timestamp", new Date());
                 body.put("status", status.value());
