@@ -1,7 +1,9 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.article;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import pl.lostworld.lostworldbackend.user.CurrentUser;
 import pl.lostworld.lostworldbackend.utils.ResponseUtils;
 
 import javax.validation.Valid;
@@ -34,5 +36,10 @@ public class ArticleController {
     @PostMapping("/add")
     public ResponseEntity<?> addArticle (@Valid @RequestBody Article article) {
         return ResponseUtils.designCreatedResponse(articleService.save(article));
+    }
+
+    @PostMapping("/addForLoggedUser")
+    public ResponseEntity<?> addArticleForLoggedUser(@RequestBody Article article, @AuthenticationPrincipal CurrentUser currentUser) {
+        return articleService.validateAndSave(article, currentUser.getActualUser());
     }
 }
