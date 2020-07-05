@@ -42,4 +42,13 @@ public class ResponseUtils {
 
         return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
     }
+
+    public static <T> ResponseEntity<?> designIAmATeapotResponse(T response) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", new Date());
+        body.put("status", HttpStatus.I_AM_A_TEAPOT.value());
+        body.put("response", response);
+
+        return new ResponseEntity<>(body, HttpStatus.I_AM_A_TEAPOT);
+    }
 }
