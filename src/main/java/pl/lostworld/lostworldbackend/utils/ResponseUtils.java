@@ -33,4 +33,13 @@ public class ResponseUtils {
 
         return new ResponseEntity<>(body, HttpStatus.OK);
     }
+
+    public static <T> ResponseEntity<?> designBadRequestResponse(T response) {
+        Map<String, Object> body = new LinkedHashMap<>();
+        body.put("timestamp", new Date());
+        body.put("status", HttpStatus.BAD_REQUEST.value());
+        body.put("response", response);
+
+        return new ResponseEntity<>(body, HttpStatus.BAD_REQUEST);
+    }
 }
