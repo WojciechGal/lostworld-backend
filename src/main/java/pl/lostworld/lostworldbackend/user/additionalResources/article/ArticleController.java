@@ -1,10 +1,10 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.article;
 
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.lostworld.lostworldbackend.utils.ResponseUtils;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/articles")
@@ -17,18 +17,22 @@ public class ArticleController {
     }
 
     @GetMapping("/checkAll")
-    public List<Article> checkAllArticles() {
-        return articleService.checkAll();
+    public ResponseEntity<?> checkAllArticles() {
+        return ResponseUtils.designOkResponse(articleService.checkAll());
+    }
+
+    @GetMapping("/check/{id}")
+    public ResponseEntity<?> checkArticle(@PathVariable Long id) {
+        return ResponseUtils.designOkResponse(articleService.checkById(id));
     }
 
     @GetMapping("/add")
-    public Article addArticle() {
-        return new Article();
+    public ResponseEntity<?> addArticle() {
+        return ResponseUtils.designOkResponse(new Article());
     }
 
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public Article addArticle (@Valid @RequestBody Article article) {
-        return articleService.save(article);
+    public ResponseEntity<?> addArticle (@Valid @RequestBody Article article) {
+        return ResponseUtils.designCreatedResponse(articleService.save(article));
     }
 }
