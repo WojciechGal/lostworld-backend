@@ -1,8 +1,6 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.article;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -40,6 +38,11 @@ public class Article {
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true)
     private User user;
+
+    @JsonSetter("user")
+    public void setUserById(Long id) {
+        this.user = new User(id);
+    }
 
     private String title;
 
