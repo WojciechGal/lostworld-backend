@@ -1,5 +1,6 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.article;
 
+import org.hibernate.Hibernate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +51,23 @@ public class ArticleService {
                     .stream()
                     .map(violation -> new Pair<>(violation.getPropertyPath().toString(), violation.getMessage()))
                     .collect(Collectors.toList()));
+        }
+    }
+
+    public ResponseEntity<?> deleteById(Long id) {
+
+        Optional<Article> article = articleRepository.findById(id);
+
+        if (article.isPresent()) {
+            //dociągnięcie danych jest wymagane przed usunięciem obiektu z DB
+            Hibernate.initialize(article.get().getContinents());
+            Hibernate.initialize(article.get().getCountries());
+            Hibernate.initialize(article.get().getCities());
+            Hibernate.initialize(article.get().getRelics());
+            articleRepository.deleteById(id);
+            return ResponseUtils.designOkResponse(article.get());
+        } else {
+            return ResponseUtils.designBadRequestSingletonResponse("No such element");
         }
     }
 }
