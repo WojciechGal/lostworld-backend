@@ -42,4 +42,9 @@ public class ArticleController {
     public ResponseEntity<?> addArticleForLoggedUser(@RequestBody Article article, @AuthenticationPrincipal CurrentUser currentUser) {
         return articleService.validateAndSave(article, currentUser.getActualUser());
     }
+
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<?> deleteArticle(@PathVariable Long id) {
+        return articleService.deleteById(id);
+    }
 }
