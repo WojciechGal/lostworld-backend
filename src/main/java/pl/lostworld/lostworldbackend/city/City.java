@@ -23,6 +23,10 @@ import java.util.List;
 @Table(name = "cities")
 public class City {
 
+    public City(Long id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
