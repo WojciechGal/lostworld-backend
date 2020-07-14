@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.lostworld</groupId>
     <artifactId>lostworld-backend</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.1.0</version>
     <name>lostworld-backend</name>
     <description>Lost World Project</description>
 
@@ -63,10 +63,6 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
         <dependency>
