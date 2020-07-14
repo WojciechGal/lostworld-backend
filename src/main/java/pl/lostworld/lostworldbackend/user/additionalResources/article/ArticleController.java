@@ -25,7 +25,7 @@ public class ArticleController {
 
     @GetMapping("/check/{id}")
     public ResponseEntity<?> checkArticle(@PathVariable Long id) {
-        return ResponseUtils.designOkResponse(articleService.checkById(id));
+        return articleService.checkById(id);
     }
 
     @GetMapping("/add")

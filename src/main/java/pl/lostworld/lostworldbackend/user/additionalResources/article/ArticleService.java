@@ -30,8 +30,15 @@ public class ArticleService {
         return articleRepository.findAll();
     }
 
-    public Article checkById(Long id) {
-        return articleRepository.findById(id).orElse(null);
+    public ResponseEntity<?> checkById(Long id) {
+
+        Optional<Article> article = articleRepository.findById(id);
+
+        if (article.isPresent()) {
+            return ResponseUtils.designOkResponse(article.get());
+        } else {
+            return ResponseUtils.designBadRequestSingletonResponse("No such element");
+        }
     }
 
     public Article save(Article article) {
