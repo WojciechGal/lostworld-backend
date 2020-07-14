@@ -43,10 +43,13 @@ public class ArticleController {
         return articleService.validateAndSave(article, currentUser.getActualUser());
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<?> updateArticle (@Valid @RequestBody Article article) {
+        return ResponseUtils.designOkResponse(articleService.save(article));
+    }
+
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteArticle(@PathVariable Long id) {
         return articleService.deleteById(id);
     }
-
-    //todo PUT MAPPING
 }
