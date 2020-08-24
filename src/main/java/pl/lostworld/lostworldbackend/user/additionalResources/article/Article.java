@@ -79,21 +79,37 @@ public class Article {
 
     @JsonSetter("continents")
     public void setContinentsByIds(List<Long> ids) {
-        this.continents = ids.stream().map(Continent::new).collect(Collectors.toList());
+        if (ids != null) {
+            this.continents = ids.stream().map(Continent::new).collect(Collectors.toList());
+        } else {
+            this.continents = null;
+        }
     }
 
     @JsonSetter("countries")
     public void setCountriesByIds(List<Long> ids) {
-        this.countries = ids.stream().map(Country::new).collect(Collectors.toList());
+        if (ids != null) {
+            this.countries = ids.stream().map(Country::new).collect(Collectors.toList());
+        } else {
+            this.countries = null;
+        }
     }
 
     @JsonSetter("cities")
     public void setCitiesByIds(List<Long> ids) {
-        this.cities = ids.stream().map(City::new).collect(Collectors.toList());
+        if (ids != null) {
+            this.cities = ids.stream().map(City::new).collect(Collectors.toList());
+        } else {
+            this.cities = null;
+        }
     }
 
     @JsonSetter("relics")
     public void setRelicsByIds(List<Long> ids) {
-        this.relics = ids.stream().map(Relic::new).collect(Collectors.toList());
+        if (ids != null) {
+            this.relics = ids.stream().map(Relic::new).collect(Collectors.toList());
+        } else {
+            this.relics = null;
+        }
     }
 }
