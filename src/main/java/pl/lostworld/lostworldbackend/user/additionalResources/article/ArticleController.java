@@ -37,6 +37,16 @@ public class ArticleController {
         }
     }
 
+    @GetMapping("/checkAllByUserId/{id}")
+    public ResponseEntity<?> checkAllArticlesByUserId(@PathVariable Long id) {
+        return ResponseUtils.designOkResponse(articleService.checkAllByUserId(id));
+    }
+
+    @GetMapping("/checkAllForLoggedUser")
+    public ResponseEntity<?> checkAllArticlesForLoggedUser(@AuthenticationPrincipal CurrentUser currentUser) {
+        return ResponseUtils.designOkResponse(articleService.checkAllByUserId(currentUser.getId()));
+    }
+
     @GetMapping("/add")
     public ResponseEntity<?> addArticle() {
         return ResponseUtils.designOkResponse(new Article());

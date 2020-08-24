@@ -30,6 +30,10 @@ public class ArticleService {
         return articleRepository.findById(id);
     }
 
+    public List<Article> checkAllByUserId(Long id) {
+        return articleRepository.findAllByUserId(id);
+    }
+
     public Article save(Article article) {
         return articleRepository.save(article);
     }
