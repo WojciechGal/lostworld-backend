@@ -26,4 +26,8 @@ public class ContinentService {
     public Continent checkById(Long id) {
         return continentRepository.findById(id).orElse(null);
     }
+
+    public boolean checkIfExists(Long id) {
+        return continentRepository.existsById(id);
+    }
 }

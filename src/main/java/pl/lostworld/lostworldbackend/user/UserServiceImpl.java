@@ -70,4 +70,9 @@ public class UserServiceImpl implements UserService {
     public List<User> findAllById(List<Long> ids) {
         return userRepository.findAllById(ids);
     }
+
+    @Override
+    public boolean checkIfExists(Long id) {
+        return userRepository.existsById(id);
+    }
 }

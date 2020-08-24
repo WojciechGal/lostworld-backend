@@ -10,6 +10,8 @@ import pl.lostworld.lostworldbackend.continent.Continent;
 import pl.lostworld.lostworldbackend.country.Country;
 import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.user.User;
+import pl.lostworld.lostworldbackend.validator.AllExists;
+import pl.lostworld.lostworldbackend.validator.Exists;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -38,6 +40,7 @@ public class Article {
     @NotNull
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true)
+    @Exists
     private User user;
 
     private String title;
@@ -48,24 +51,28 @@ public class Article {
     @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "continent_id"))
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true)
+    @AllExists
     private List<Continent> continents = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "country_id"))
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true)
+    @AllExists
     private List<Country> countries = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "city_id"))
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true)
+    @AllExists
     private List<City> cities = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "article_id"), inverseJoinColumns = @JoinColumn(name = "relic_id"))
     @JsonIdentityInfo(generator= ObjectIdGenerators.PropertyGenerator.class, property="id")
     @JsonIdentityReference(alwaysAsId=true)
+    @AllExists
     private List<Relic> relics = new ArrayList<>();
 
     @JsonSetter("user")

@@ -18,4 +18,8 @@ public class RelicService {
     public List<Relic> checkAll() {
         return relicRepository.findAll();
     }
+
+    public boolean checkIfExists(Long id) {
+        return relicRepository.existsById(id);
+    }
 }

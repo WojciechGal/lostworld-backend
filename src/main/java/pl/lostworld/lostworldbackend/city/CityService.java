@@ -18,4 +18,8 @@ public class CityService {
     public List<City> checkAll() {
         return cityRepository.findAll();
     }
+
+    public boolean checkIfExists(Long id) {
+        return cityRepository.existsById(id);
+    }
 }

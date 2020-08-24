@@ -26,4 +26,8 @@ public class CountryService {
     public Country checkById(Long id) {
         return countryRepository.findById(id).orElse(null);
     }
+
+    public boolean checkIfExists(Long id) {
+        return countryRepository.existsById(id);
+    }
 }

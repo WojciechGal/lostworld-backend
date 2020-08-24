@@ -15,4 +15,6 @@ public interface UserService {
     public List<User> findAllUsers();
 
     public List<User> findAllById(List<Long> ids);
+
+    public boolean checkIfExists(Long id);
 }
