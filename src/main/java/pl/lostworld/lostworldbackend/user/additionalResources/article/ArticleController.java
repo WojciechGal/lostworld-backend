@@ -5,8 +5,12 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.user.CurrentUser;
 import pl.lostworld.lostworldbackend.utils.ResponseUtils;
+import pl.lostworld.lostworldbackend.utils.ValidationUtils;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/articles")
@@ -25,7 +29,12 @@ public class ArticleController {
 
     @GetMapping("/check/{id}")
     public ResponseEntity<?> checkArticle(@PathVariable Long id) {
-        return articleService.checkById(id);
+        Optional<Article> article = articleService.checkById(id);
+        if (article.isPresent()) {
+            return ResponseUtils.designOkResponse(article.get());
+        } else {
+            return ResponseUtils.designBadRequestSingletonResponse("No such element");
+        }
     }
 
     @GetMapping("/add")
@@ -35,12 +44,19 @@ public class ArticleController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addArticle (@Valid @RequestBody Article article) {
+        System.out.println(article.getUser().getId());
+        System.out.println(article.getUser().getUsername());
         return ResponseUtils.designCreatedResponse(articleService.save(article));
     }
 
     @PostMapping("/addForLoggedUser")
     public ResponseEntity<?> addArticleForLoggedUser(@RequestBody Article article, @AuthenticationPrincipal CurrentUser currentUser) {
-        return articleService.validateAndSave(article, currentUser.getActualUser());
+        Set<ConstraintViolation<Article>> violations = articleService.setUserAndValidate(article, currentUser.getActualUser());
+        if (violations.isEmpty()) {
+            return ResponseUtils.designCreatedResponse(articleService.setUserAndSave(article, currentUser.getActualUser()));
+        } else {
+            return ResponseUtils.designBadRequestResponse(ValidationUtils.mapViolationsForResponse(violations));
+        }
     }
 
     @PutMapping("/update")
@@ -50,6 +66,11 @@ public class ArticleController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteArticle(@PathVariable Long id) {
-        return articleService.deleteById(id);
+        Optional<Article> article = articleService.deleteById(id);
+        if (article.isPresent()) {
+            return ResponseUtils.designOkResponse(article.get());
+        } else {
+            return ResponseUtils.designBadRequestSingletonResponse("No such element");
+        }
     }
 }
