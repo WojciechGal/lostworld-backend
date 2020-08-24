@@ -40,6 +40,7 @@ public class ArticleService {
     }
 
     public Set<ConstraintViolation<Article>> setUserAndValidate(Article article, User user) {
+        article.setUser(user);
         return validator.validate(article);
     }
 

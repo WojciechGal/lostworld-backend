@@ -44,8 +44,9 @@ public class ArticleController {
 
     @PostMapping("/add")
     public ResponseEntity<?> addArticle (@Valid @RequestBody Article article) {
-        System.out.println(article.getUser().getId());
-        System.out.println(article.getUser().getUsername());
+//        System.out.println(article.getUser());
+//        System.out.println(article.getUser().getId());
+//        System.out.println(article.getUser().getUsername());
         return ResponseUtils.designCreatedResponse(articleService.save(article));
     }
 

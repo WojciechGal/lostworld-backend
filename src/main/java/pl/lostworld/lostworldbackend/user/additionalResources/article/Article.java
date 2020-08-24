@@ -70,7 +70,11 @@ public class Article {
 
     @JsonSetter("user")
     public void setUserById(Long id) {
-        this.user = new User(id);
+        if (id != null) {
+            this.user = new User(id);
+        } else {
+            this.user = null;
+        }
     }
 
     @JsonSetter("continents")
