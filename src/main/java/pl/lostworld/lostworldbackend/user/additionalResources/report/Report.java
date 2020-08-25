@@ -18,9 +18,9 @@ import java.util.List;
 @Table(name = "reports")
 public class Report extends UserResource {
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.MERGE)
     private TravelPlan travelPlan;
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(mappedBy = "report", cascade = CascadeType.MERGE)
     private List<Album> albums = new ArrayList<>();
 }

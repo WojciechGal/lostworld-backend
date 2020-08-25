@@ -1,12 +1,10 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.plan;
 
 import lombok.extern.java.Log;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import pl.lostworld.lostworldbackend.user.CurrentUser;
-import pl.lostworld.lostworldbackend.user.additionalResources.article.Article;
 import pl.lostworld.lostworldbackend.utils.ResponseUtils;
 import pl.lostworld.lostworldbackend.utils.ValidationUtils;
 

@@ -4,6 +4,7 @@ import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lostworld.lostworldbackend.user.User;
+import pl.lostworld.lostworldbackend.utils.HibernateUtils;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
@@ -54,10 +55,7 @@ public class TravelPlanService {
         Optional<TravelPlan> travelPlan = travelPlanRepository.findById(id);
         if (travelPlan.isPresent()) {
             //dociągnięcie danych jest wymagane przed usunięciem obiektu z DB
-            Hibernate.initialize(travelPlan.get().getSequenceOfContinents());
-            Hibernate.initialize(travelPlan.get().getSequenceOfCountries());
-            Hibernate.initialize(travelPlan.get().getSequenceOfCities());
-            Hibernate.initialize(travelPlan.get().getSequenceOfRelics());
+            HibernateUtils.initializeSequenceOfTerritoryEntities(travelPlan);
             travelPlanRepository.deleteById(id);
             return travelPlan;
         } else {
