@@ -10,6 +10,8 @@ import pl.lostworld.lostworldbackend.country.Country;
 import pl.lostworld.lostworldbackend.country.CountryService;
 import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.relic.RelicService;
+import pl.lostworld.lostworldbackend.user.additionalResources.album.Album;
+import pl.lostworld.lostworldbackend.user.additionalResources.album.AlbumService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -31,6 +33,9 @@ public class AllExistsValidator implements ConstraintValidator<AllExists, Object
     @Autowired
     private RelicService relicService;
 
+    @Autowired
+    private AlbumService albumService;
+
     @Override
     public void initialize(AllExists constraintAnnotation) {
     }
@@ -42,9 +47,11 @@ public class AllExistsValidator implements ConstraintValidator<AllExists, Object
             } else if (((List) listToValidate).get(0) instanceof Country) {
                 return ((List<?>)listToValidate).stream().allMatch(objectToValidate -> countryService.checkIfExists(((Country) objectToValidate).getId()));
             } else if (((List) listToValidate).get(0) instanceof City) {
-                return ((List<?>)listToValidate).stream().allMatch(objectToValidate -> countryService.checkIfExists(((City) objectToValidate).getId()));
+                return ((List<?>)listToValidate).stream().allMatch(objectToValidate -> cityService.checkIfExists(((City) objectToValidate).getId()));
             } else if (((List) listToValidate).get(0) instanceof Relic) {
-                return ((List<?>)listToValidate).stream().allMatch(objectToValidate -> countryService.checkIfExists(((Relic) objectToValidate).getId()));
+                return ((List<?>)listToValidate).stream().allMatch(objectToValidate -> relicService.checkIfExists(((Relic) objectToValidate).getId()));
+            } else if (((List) listToValidate).get(0) instanceof Album) {
+                return ((List<?>)listToValidate).stream().allMatch(objectToValidate -> albumService.checkIfExists(((Album) objectToValidate).getId()));
             }
         }
         return true;

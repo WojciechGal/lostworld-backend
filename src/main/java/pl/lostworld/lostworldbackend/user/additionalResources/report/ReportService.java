@@ -61,4 +61,8 @@ public class ReportService {
             return report;
         }
     }
+
+    public boolean checkIfExists(Long id) {
+        return reportRepository.existsById(id);
+    }
 }

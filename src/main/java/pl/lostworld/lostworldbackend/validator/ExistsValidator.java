@@ -11,6 +11,8 @@ import pl.lostworld.lostworldbackend.relic.Relic;
 import pl.lostworld.lostworldbackend.relic.RelicService;
 import pl.lostworld.lostworldbackend.user.User;
 import pl.lostworld.lostworldbackend.user.UserService;
+import pl.lostworld.lostworldbackend.user.additionalResources.report.Report;
+import pl.lostworld.lostworldbackend.user.additionalResources.report.ReportService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -20,6 +22,9 @@ public class ExistsValidator implements ConstraintValidator<Exists, Object> {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ReportService reportService;
+
     @Override
     public void initialize(Exists constraintAnnotation) {
     }
@@ -27,6 +32,8 @@ public class ExistsValidator implements ConstraintValidator<Exists, Object> {
     public boolean isValid(Object objectToValidate, ConstraintValidatorContext context) {
         if (objectToValidate instanceof User) {
             return userService.checkIfExists(((User) objectToValidate).getId());
+        } else if (objectToValidate instanceof Report) {
+            return reportService.checkIfExists(((Report) objectToValidate).getId());
         }
         return true;
     }
