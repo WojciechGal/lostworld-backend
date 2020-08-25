@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Table(name = "travel_plans")
 public class TravelPlan extends UserResource {
 
-    @OneToOne(mappedBy = "travelPlan")
+    @OneToOne(mappedBy = "travelPlan", cascade = CascadeType.MERGE)
     private Report report;
 }
 
