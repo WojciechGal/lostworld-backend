@@ -1,6 +1,5 @@
 package pl.lostworld.lostworldbackend.user.additionalResources.report;
 
-import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.lostworld.lostworldbackend.user.User;
