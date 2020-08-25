@@ -2,6 +2,7 @@ package pl.lostworld.lostworldbackend.templates;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +21,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -75,5 +77,50 @@ public class UserResource {
     @JsonIdentityReference(alwaysAsId=true)
     @AllExists
     private List<Relic> sequenceOfRelics = new ArrayList<>();
+
+    @JsonSetter("user")
+    public void setUserById(Long id) {
+        if (id != null) {
+            this.user = new User(id);
+        } else {
+            this.user = null;
+        }
+    }
+
+    @JsonSetter("sequenceOfContinents")
+    public void setSequenceOfContinentsByIds(List<Long> ids) {
+        if (ids != null) {
+            this.sequenceOfContinents = ids.stream().map(Continent::new).collect(Collectors.toList());
+        } else {
+            this.sequenceOfContinents = null;
+        }
+    }
+
+    @JsonSetter("sequenceOfCountries")
+    public void setSequenceOfCountriesByIds(List<Long> ids) {
+        if (ids != null) {
+            this.sequenceOfCountries = ids.stream().map(Country::new).collect(Collectors.toList());
+        } else {
+            this.sequenceOfCountries = null;
+        }
+    }
+
+    @JsonSetter("sequenceOfCities")
+    public void setSequenceOfCitiesByIds(List<Long> ids) {
+        if (ids != null) {
+            this.sequenceOfCities = ids.stream().map(City::new).collect(Collectors.toList());
+        } else {
+            this.sequenceOfCities = null;
+        }
+    }
+
+    @JsonSetter("sequenceOfRelics")
+    public void setSequenceOfRelicsByIds(List<Long> ids) {
+        if (ids != null) {
+            this.sequenceOfRelics = ids.stream().map(Relic::new).collect(Collectors.toList());
+        } else {
+            this.sequenceOfRelics = null;
+        }
+    }
 }
 
